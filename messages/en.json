@@ -1,0 +1,47 @@
+{
+  "japan": {
+    "meta": {
+      "title": "Study in Japan",
+      "description": "World-class universities, MEXT scholarships, and a rich cultural experience await Nepali students in Japan."
+    },
+    "hero": {
+      "label": "Study Abroad",
+      "heading": "Study in Japan",
+      "body": "Japan offers excellent academic institutions and generous government scholarships. With strong demand for international students and a high quality of life, it remains one of Nepal's most popular study destinations."
+    },
+    "why": {
+      "heading": "Why Japan?",
+      "highlights": [
+        {
+          "title": "MEXT Scholarship",
+          "body": "The Japanese Government Scholarship (MEXT) fully funds undergraduate and graduate study, covering tuition, travel, and a monthly stipend."
+        },
+        {
+          "title": "Language Support",
+          "body": "Universities offer Japanese language programmes and English-taught courses. Learning Japanese opens doors in one of the world's largest economies."
+        },
+        {
+          "title": "Part-Time Work Rights",
+          "body": "Student visas permit up to 28 hours of part-time work per week, helping cover living costs in cities like Tokyo and Osaka."
+        },
+        {
+          "title": "Safety & Quality of Life",
+          "body": "Japan consistently ranks among the safest countries in the world, with excellent public transport, healthcare, and a welcoming culture."
+        },
+        {
+          "title": "World-Class Research",
+          "body": "Japanese universities excel in engineering, robotics, medicine, and natural sciences, with deep industry ties and cutting-edge facilities."
+        },
+        {
+          "title": "Cultural Richness",
+          "body": "From ancient temples to modern pop culture, studying in Japan is a transformative personal experience alongside world-class academics."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Interested in studying in Japan?",
+      "body": "Book a free session with our Japan specialist.",
+      "button": "Book a Free Counselling Session"
+    }
+  }
+}
