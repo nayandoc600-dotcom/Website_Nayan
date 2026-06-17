@@ -18,6 +18,13 @@ Install these before you start:
 
 > Docker must be **running** whenever you work on this project (Supabase runs inside it).
 
+> **Windows / PowerShell.** If `npm`/`npx` scripts are blocked with a "running scripts is
+> disabled on this system" error, allow local scripts once:
+>
+> ```powershell
+> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+> ```
+
 ---
 
 ## 1 — Clone the repo
@@ -45,7 +52,7 @@ Supabase runs entirely on your machine via Docker. No cloud account needed for l
 npx supabase start
 ```
 
-First run downloads ~1 GB of Docker images — takes a few minutes. Subsequent starts are fast.
+> **Docker must be running** before you run this. The first run downloads ~1 GB of Docker images — takes a few minutes. Subsequent starts are fast.
 
 When it finishes you will see output like this:
 
@@ -57,6 +64,13 @@ Studio URL: http://127.0.0.1:54323
 ```
 
 Copy those values — you need them in the next step.
+
+> **Windows troubleshooting.** If `npx supabase start` fails with a WSL / `tini` /
+> container error, fix Docker itself: **Docker Desktop → Settings → Troubleshoot →
+> Clean / Purge data**, and ensure the WSL 2 backend is enabled (**Settings → General →
+> Use the WSL 2 based engine**). Also keep this project **out of OneDrive** — OneDrive's
+> file syncing corrupts Docker/Supabase volume artifacts. Clone it to a plain path like
+> `C:\dev\Website_Nayan`.
 
 ---
 
@@ -90,12 +104,16 @@ GOOGLE_SHEETS_SPREADSHEET_ID=placeholder
 ## 5 — Apply database migrations and seed data
 
 ```bash
-npx supabase db push --local
+npx supabase db reset
 ```
 
-This creates all tables, enables RLS, sets up storage buckets, and inserts sample testimonials + a demo popup notice.
+This applies **all** migrations from scratch — including the `fix_service_role_grants`
+migration that grants `service_role` full CRUD on the app tables — then runs `seed.sql`
+to insert sample testimonials + a demo popup notice. It creates every table, enables RLS,
+and sets up the storage buckets.
 
-> If prompted `Do you want to push these migrations?` — type `Y` and press Enter.
+> ⚠️ `db reset` **wipes your local database**, including any rows you added and **all
+> auth users** you created in Studio. Re-create your admin user (step 7) after a reset.
 
 ---
 
@@ -194,6 +212,20 @@ tests/
 - **RLS on every table.** The `anon` role only gets `SELECT` on public tables and `INSERT` on `contact_submissions`. Everything else requires the service-role key or an authenticated session.
 - **Visa approvals expire automatically.** No cron — the query filters `created_at > now() - 7 days`. One upload → standalone image. Two or more → auto-carousel.
 - **Contact form is resilient.** Supabase insert is the source of truth. Resend email and Google Sheets run in `Promise.allSettled` — failures are logged but never block the user.
+
+---
+
+## Recent changes
+
+- **Homepage redesign.** Reworked the public landing experience — `Header`, `HeroSection`,
+  the new auto-playing `HeroSlider`, `DestinationsPreview`, `Footer`, and `StatsSection`.
+  Added imagery under `public/` (hero backgrounds `bg1–bg4.jpg`, destination images, logo).
+  Destination image filenames are **lowercase** to stay correct on case-sensitive hosts
+  (Linux / Vercel).
+- **DB: `service_role` grants fix.** Migration `20260614144430_fix_service_role_grants.sql`
+  grants `service_role` `SELECT/INSERT/UPDATE/DELETE` on the app tables (`testimonials`,
+  `visa_approvals`, `popup_notice`, `news_posts`, `study_materials`) so the admin panel can
+  read and write. RLS still applies as the backstop. Applied automatically by `db reset`.
 
 ---
 
