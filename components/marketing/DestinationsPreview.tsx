@@ -38,9 +38,9 @@ const DEST_IMAGES: Record<string, string> = {
 
 export default function DestinationsPreview() {
   return (
-    <section className="bg-paper py-20 px-6">
+    <section className="bg-paper py-14 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-2">
               Where We Send Students

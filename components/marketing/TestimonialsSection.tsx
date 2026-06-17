@@ -62,11 +62,11 @@ export default function TestimonialsSection({
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="bg-sky py-20 px-6">
+    <section className="bg-sky py-14 px-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Section header + prev/next controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-2">
               Student Stories

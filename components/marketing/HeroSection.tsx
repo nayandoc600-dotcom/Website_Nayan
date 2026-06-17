@@ -18,7 +18,7 @@ export default function HeroSection() {
       />
 
       {/* Hero copy — all text preserved verbatim */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 w-full py-20">
+      <div className="relative z-20 max-w-6xl mx-auto px-6 w-full py-16">
         {/* Eyebrow — bigger + bold */}
         <p className="text-base font-bold text-brass uppercase tracking-widest mb-4">
           Study Abroad from Nepal

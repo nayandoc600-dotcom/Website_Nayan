@@ -26,7 +26,14 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer className="bg-ink text-paper/80">
-      <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* ── Tagline banner ────────────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 pt-6 pb-2 text-center">
+        <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-paper leading-tight">
+          A Decade Long Quest <em>For Excellence</em>
+        </p>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
 
         {/* ── Brand block ───────────────────────────────────────────────── */}
         <div className="sm:col-span-2 lg:col-span-1">
@@ -42,12 +49,12 @@ export default function Footer() {
             </span>
           </Link>
 
-          <p className="text-sm leading-relaxed mb-4 max-w-xs">
+          <p className="text-sm leading-relaxed mb-3 max-w-xs">
             Helping students in Nepal see their future clearly — and reach it.
             Study abroad with confidence.
           </p>
 
-          <address className="not-italic space-y-1.5 text-sm text-paper/60 mb-4">
+          <address className="not-italic space-y-1 text-sm text-paper/60 mb-3">
             <p className="flex items-start gap-2">
               <MapPin size={13} className="mt-0.5 shrink-0" aria-hidden="true" />
               Kathmandu, Nepal
@@ -140,7 +147,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ────────────────────────────────────────────────────── */}
       <div className="border-t border-paper/10">
-        <div className="max-w-6xl mx-auto px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-paper/40">
+        <div className="max-w-6xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-paper/40">
           <p>© {new Date().getFullYear()} Nayan Educational Consultancy. All rights reserved.</p>
           <p>Kathmandu, Nepal · Built with care</p>
         </div>

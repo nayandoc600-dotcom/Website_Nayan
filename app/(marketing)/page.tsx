@@ -7,7 +7,6 @@ import DestinationsPreview from "@/components/marketing/DestinationsPreview";
 import VisaApprovalsSection from "@/components/marketing/VisaApprovalsSection";
 import TestimonialsSection from "@/components/marketing/TestimonialsSection";
 import TestimonialSubmitForm from "@/components/marketing/TestimonialSubmitForm";
-import CtaSection from "@/components/marketing/CtaSection";
 
 export const revalidate = 3600;
 
@@ -42,7 +41,7 @@ export default async function HomePage() {
       <TestimonialsSection testimonials={testimonials} />
 
       {/* Student feedback submission */}
-      <section className="bg-sky py-24 px-6 border-t border-sand">
+      <section className="bg-sky py-14 px-6 border-t border-sand">
         <div className="max-w-2xl mx-auto">
           <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-3">
             Share Your Story
@@ -50,15 +49,13 @@ export default async function HomePage() {
           <h2 className="font-display text-h2 font-semibold text-ink mb-3">
             Studied abroad with us?
           </h2>
-          <p className="text-slate leading-relaxed mb-10">
+          <p className="text-slate leading-relaxed mb-6">
             We&apos;d love to hear about your experience. All submissions are reviewed
             before appearing publicly.
           </p>
           <TestimonialSubmitForm />
         </div>
       </section>
-
-      <CtaSection />
     </>
   );
 }

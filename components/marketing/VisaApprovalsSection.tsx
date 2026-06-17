@@ -10,7 +10,7 @@ export default function VisaApprovalsSection({
   if (approvals.length === 0) return null;
 
   return (
-    <section id="visa-approvals" className="bg-sky py-20 px-6">
+    <section id="visa-approvals" className="bg-sky py-14 px-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Copy */}
         <div>
