@@ -193,7 +193,7 @@ lib/
   destinations.ts     Static destinations data
 
 supabase/
-  migrations/         SQL migrations — run with `npx supabase db push --local`
+  migrations/         SQL migrations — applied by `npx supabase db reset`
   seed.sql            Sample testimonials + popup notice
 
 messages/
