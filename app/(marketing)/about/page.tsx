@@ -38,6 +38,11 @@ const TEAM = [
     role: "Japan Programme Head",
     bio: "Japanese language instructor and MEXT scholarship alumnus. Leads our dedicated Japan intake each year.",
   },
+  {
+    name: "Anuj Shrestha",
+    role: "Japan Programme Head",
+    bio: "Japanese language instructor and MEXT scholarship alumnus. Leads our dedicated Japan intake each year.",
+  },
 ] as const;
 
 export default function AboutPage() {

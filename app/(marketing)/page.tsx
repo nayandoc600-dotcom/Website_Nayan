@@ -42,15 +42,15 @@ export default async function HomePage() {
       <TestimonialsSection testimonials={testimonials} />
 
       {/* Student feedback submission */}
-      <section className="bg-paper py-20 px-6 border-t border-sand">
+      <section className="bg-sky py-24 px-6 border-t border-sand">
         <div className="max-w-2xl mx-auto">
           <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-3">
             Share Your Story
           </p>
-          <h2 className="font-display text-h2 font-semibold text-ink mb-2">
+          <h2 className="font-display text-h2 font-semibold text-ink mb-3">
             Studied abroad with us?
           </h2>
-          <p className="text-slate text-sm leading-relaxed mb-8">
+          <p className="text-slate leading-relaxed mb-10">
             We&apos;d love to hear about your experience. All submissions are reviewed
             before appearing publicly.
           </p>

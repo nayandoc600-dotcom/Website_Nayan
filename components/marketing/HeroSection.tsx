@@ -1,52 +1,60 @@
 import Link from "next/link";
+import HeroSlider from "./HeroSlider";
 
 export default function HeroSection() {
   return (
-    <section className="bg-paper py-24 md:py-32 px-6">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        {/* Copy */}
-        <div>
-          <p className="text-sm font-medium text-brass uppercase tracking-widest mb-4">
-            Study Abroad from Nepal
-          </p>
-          <h1 className="font-display text-h1 md:text-5xl lg:text-6xl font-semibold text-ink leading-tight mb-6">
-            <em>See your future</em>
-            <br />
-            clearly.
-          </h1>
-          <p className="text-slate text-lg leading-relaxed max-w-md mb-10">
-            Nayan Educational Consultancy helps students across Nepal navigate
-            the study-abroad journey — from choosing the right country to
-            landing the visa — with clarity and confidence.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/destinations"
-              className="inline-flex items-center px-6 py-3 rounded-md bg-brand text-paper font-medium hover:bg-ink transition-colors"
-            >
-              Explore Destinations
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center px-6 py-3 rounded-md border border-ink text-ink font-medium hover:bg-sky transition-colors"
-            >
-              Talk to a Counsellor
-            </Link>
-          </div>
-        </div>
+    <section className="relative min-h-[calc(100vh-72px)] flex items-center overflow-hidden">
+      {/* Background image slider (with navy gradient base) */}
+      <HeroSlider />
 
-        {/* Visual — decorative block */}
-        <div className="hidden md:flex justify-center">
-          <div className="relative w-80 h-80">
-            {/* Layered rectangles suggesting a journey / wave */}
-            <div className="absolute inset-0 rounded-2xl bg-sky" />
-            <div className="absolute inset-6 rounded-2xl bg-sand" />
-            <div className="absolute inset-12 rounded-2xl bg-brand/10 flex items-center justify-center">
-              <span className="font-display italic text-5xl text-brand/30 select-none">
-                नयन
-              </span>
-            </div>
-          </div>
+      {/* Left-weighted navy scrim for WCAG AA contrast over the image */}
+      <div
+        className="absolute inset-0 z-10"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(12,42,68,0.92) 0%, rgba(12,42,68,0.70) 45%, rgba(12,42,68,0.25) 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Hero copy — all text preserved verbatim */}
+      <div className="relative z-20 max-w-6xl mx-auto px-6 w-full py-20">
+        {/* Eyebrow — bigger + bold */}
+        <p className="text-base font-bold text-brass uppercase tracking-widest mb-4">
+          Study Abroad from Nepal
+        </p>
+
+        {/*
+         * Inline color forces white past the globals.css `h1 { color: ink }`
+         * rule (unlayered CSS beats utility classes in Tailwind v4).
+         */}
+        <h1
+          className="font-display text-h1 md:text-5xl lg:text-6xl font-semibold leading-tight mb-6"
+          style={{ color: "#ffffff" }}
+        >
+          <em>See your future</em>
+          <br />
+          clearly!
+        </h1>
+
+        <p className="text-paper/80 text-lg leading-relaxed max-w-md mb-10">
+          Nayan Educational Consultancy helps students across Nepal navigate
+          the study-abroad journey — from choosing the right country to
+          landing the visa — with clarity and confidence.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/destinations"
+            className="inline-flex items-center px-6 py-3 rounded-md bg-brand text-paper font-medium hover:bg-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper"
+          >
+            Explore Destinations
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center px-6 py-3 rounded-md border border-paper/60 text-paper font-medium hover:bg-paper/10 transition-colors backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper"
+          >
+            Talk to a Counsellor
+          </Link>
         </div>
       </div>
     </section>

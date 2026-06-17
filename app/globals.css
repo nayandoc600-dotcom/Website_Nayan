@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@layer base {
+  html { background-color: var(--color-paper); color: var(--color-ink); }
+  body { /* ...your existing body rules... */ }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+}
 @theme {
   /* Brand colors */
   --color-ink: #0c2a44;
@@ -30,7 +39,7 @@
   --spacing-6: 3rem;
   --spacing-8: 4rem;
   --spacing-10: 5rem;
-  --spacing-12: 6rem;
+  --spacing-12: 3rem;
   --spacing-16: 8rem;
 }
 
@@ -41,6 +50,13 @@
 html {
   background-color: theme(--color-paper);
   color: theme(--color-ink);
+}
+
+/* Smooth scrolling — only when the user hasn't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
