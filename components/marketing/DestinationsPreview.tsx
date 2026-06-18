@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { DESTINATIONS } from "@/lib/destinations";
+import Flag from "./Flag";
 
 /*
  * The exact 6 destinations to show on the homepage, in order.
@@ -102,9 +103,10 @@ export default function DestinationsPreview() {
                         Inline color FORCES white past the globals.css
                         `h3 { color: ink }` rule that was hiding the names. */}
                     <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-4">
-                      <span className="text-xl" role="img" aria-hidden="true">
-                        {dest.flag}
-                      </span>
+                      <Flag
+                        code={dest.code}
+                        className="h-5 w-auto rounded-sm shadow"
+                      />
                       <h3
                         className="font-display text-lg font-semibold"
                         style={{

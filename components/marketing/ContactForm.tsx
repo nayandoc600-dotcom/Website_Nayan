@@ -95,7 +95,7 @@ export default function ContactForm() {
             <option value="">Select a country…</option>
             {DESTINATIONS.map((d) => (
               <option key={d.slug} value={d.name}>
-                {d.flag} {d.name}
+                {d.name}
               </option>
             ))}
           </select>

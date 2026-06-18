@@ -61,25 +61,45 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                   Address
                 </p>
-                <p className="text-ink">Kathmandu, Nepal</p>
+                <p className="text-ink">
+                  Minbhawan, Kathmandu, Nepal
+                  <br />
+                  <span className="text-slate">Near Civil Hospital</span>
+                </p>
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                   Phone
                 </p>
-                <a href="tel:+97714XXXXXXX" className="text-brand hover:underline">
-                  +977 1-XXXXXXX
-                </a>
+                <p className="flex flex-col">
+                  <a href="tel:+97714797183" className="text-brand hover:underline">
+                    +977-1-4797183
+                  </a>
+                  <a href="tel:+97714794328" className="text-brand hover:underline">
+                    +977-1-4794328
+                  </a>
+                </p>
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                   Email
                 </p>
                 <a
-                  href="mailto:info@nayaneducational.com"
+                  href="mailto:info@nayanedu.com"
                   className="text-brand hover:underline"
                 >
-                  info@nayaneducational.com
+                  info@nayanedu.com
+                </a>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
+                  Website
+                </p>
+                <a
+                  href="https://www.nayanedu.com"
+                  className="text-brand hover:underline"
+                >
+                  www.nayanedu.com
                 </a>
               </div>
               <div>

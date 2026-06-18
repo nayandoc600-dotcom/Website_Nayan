@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { DESTINATIONS } from "@/lib/destinations";
 
-const BASE = "https://nayaneducational.com";
+const BASE = "https://www.nayanedu.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

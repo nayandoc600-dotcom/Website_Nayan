@@ -18,7 +18,7 @@ test.describe("Marketing pages", () => {
     await expect(page.getByText("Japan")).toBeVisible();
     await expect(page.getByText("United Kingdom")).toBeVisible();
     await expect(page.getByText("Australia")).toBeVisible();
-    await expect(page.getByText("Germany")).toBeVisible();
+    await expect(page.getByText("Europe")).toBeVisible();
   });
 
   test("non-Japan destination page renders", async ({ page }) => {
@@ -59,7 +59,7 @@ test.describe("Marketing pages", () => {
     const response = await page.goto("/sitemap.xml");
     expect(response?.status()).toBe(200);
     const body = await page.content();
-    expect(body).toContain("nayaneducational.com");
+    expect(body).toContain("nayanedu.com");
   });
 
   test("robots.txt disallows /admin/", async ({ page }) => {

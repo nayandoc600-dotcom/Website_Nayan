@@ -33,7 +33,7 @@ export default function LoginForm() {
               autoComplete="email"
               required
               className="rounded-md border border-sand bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
-              placeholder="admin@nayaneducational.com"
+              placeholder="admin@nayanedu.com"
             />
           </div>
 

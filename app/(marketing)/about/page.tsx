@@ -4,8 +4,22 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Nayan Educational Consultancy — 18 years helping Nepali students achieve their study-abroad goals with clarity and confidence.",
+    "Nayan Educational Consultancy — established 2014 in Minbhawan, Kathmandu. Over a decade helping Nepali students study abroad with clarity and confidence.",
 };
+
+const SERVICES = [
+  "Test Preparation — IELTS, PTE, Duolingo",
+  "Japanese Proficiency — JLPT (N5–N1), NAT (5–1), JLCT (5–1), JPT",
+  "Visa & University Interview Preparation",
+  "University & College Selection Guidance",
+  "Course Selection Guidance",
+  "Admission & Documentation Formalities",
+  "On-Spot Admission & Counselling Seminars",
+  "Visa Formalities",
+  "Accommodation & Travel Arrangements",
+  "Pre-Departure Briefing & Training",
+  "Part-Time Work Guidance",
+] as const;
 
 const VALUES = [
   {
@@ -22,29 +36,6 @@ const VALUES = [
   },
 ] as const;
 
-const TEAM = [
-  {
-    name: "Prakash Adhikari",
-    role: "Founder & Lead Counsellor",
-    bio: "18 years in international education. Former student advisor at Tribhuvan University. Placed students in 25+ countries.",
-  },
-  {
-    name: "Sunita Tamang",
-    role: "Senior Visa Specialist",
-    bio: "Expert in UK, Australia, and Canada visa procedures. 99% first-attempt visa approval rate over 10 years.",
-  },
-  {
-    name: "Rajesh Shrestha",
-    role: "Japan Programme Head",
-    bio: "Japanese language instructor and MEXT scholarship alumnus. Leads our dedicated Japan intake each year.",
-  },
-  {
-    name: "Anuj Shrestha",
-    role: "Japan Programme Head",
-    bio: "Japanese language instructor and MEXT scholarship alumnus. Leads our dedicated Japan intake each year.",
-  },
-] as const;
-
 export default function AboutPage() {
   return (
     <>
@@ -55,13 +46,15 @@ export default function AboutPage() {
             Our Story
           </p>
           <h1 className="font-display text-h1 font-semibold text-ink mb-5 leading-tight">
-            Helping students see <em>clearly</em> since 2006.
+            Helping students see <em>clearly</em> since 2014.
           </h1>
           <p className="text-slate text-lg leading-relaxed">
-            Nayan — meaning <em>eye</em> — was founded on a simple belief: every
-            student deserves honest, personalised guidance on studying abroad.
-            Not a sales pitch. Not a one-size-fits-all package. A clear view of
-            their future.
+            From a small and humble beginning in 2014, Nayan Educational
+            Consultancy has grown — through hard work and perseverance — into one
+            of the most referred and preferred consultancies in Kathmandu, based
+            in the central locality of Minbhawan. We were founded on a simple
+            belief: every student deserves honest, personalised guidance on
+            studying abroad — not a sales pitch, but a clear view of their future.
           </p>
         </div>
       </section>
@@ -86,30 +79,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Services */}
       <section className="bg-paper py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10">
             <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-2">
-              The People Behind Nayan
+              How We Help
             </p>
             <h2 className="font-display text-h2 font-semibold text-ink">
-              Meet Our Team
+              Our Services
             </h2>
+            <p className="text-slate text-sm leading-relaxed mt-3 max-w-2xl">
+              From your first counselling session to the day you land abroad, we
+              support every step — language preparation, applications, visas, and
+              settling in.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {TEAM.map(({ name, role, bio }) => (
-              <div key={name} className="border-t-2 border-brass pt-6">
-                <div className="w-16 h-16 rounded-full bg-sand mb-4 flex items-center justify-center">
-                  <span className="font-display text-xl text-brass font-semibold">
-                    {name[0]}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-ink">{name}</h3>
-                <p className="text-xs text-brass font-medium uppercase tracking-wide mt-0.5 mb-3">
-                  {role}
-                </p>
-                <p className="text-slate text-sm leading-relaxed">{bio}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SERVICES.map((service) => (
+              <div
+                key={service}
+                className="flex items-start gap-3 bg-sky rounded-xl p-5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-brass mt-2 shrink-0" />
+                <p className="text-ink text-sm leading-relaxed">{service}</p>
               </div>
             ))}
           </div>

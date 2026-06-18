@@ -15,25 +15,23 @@ const RESOURCES = [
   { label: "News & Updates", href: "/news" },
 ];
 
-// lucide-react v1.x removed brand icons; swap hrefs + labels when you add
-// real social links (Instagram, Facebook, YouTube, etc.)
+// lucide-react v1.x removed brand icons; swap for real brand icons when available
 const SOCIALS = [
-  { Icon: Globe, label: "Website", href: "#" },
-  { Icon: MessageCircle, label: "Facebook", href: "#" },
-  { Icon: Rss, label: "YouTube", href: "#" },
+  { Icon: Globe, label: "Website", href: "https://www.nayanedu.com" },
+  { Icon: MessageCircle, label: "Facebook", href: "https://www.facebook.com/nayan.education" },
 ] as const;
 
 export default function Footer() {
   return (
     <footer className="bg-ink text-paper/80">
       {/* ── Tagline banner ────────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 pt-6 pb-2 text-center">
-        <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-paper leading-tight">
+      <div className="max-w-7xl mx-auto px-8 pt-5 pb-1 text-center">
+        <p className="font-display text-lg md:text-xl lg:text-2xl font-semibold text-paper leading-tight">
           A Decade Long Quest <em>For Excellence</em>
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
+      <div className="max-w-7xl mx-auto px-8 py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-4">
 
         {/* ── Brand block ───────────────────────────────────────────────── */}
         <div className="sm:col-span-2 lg:col-span-1">
@@ -57,18 +55,18 @@ export default function Footer() {
           <address className="not-italic space-y-1 text-sm text-paper/60 mb-3">
             <p className="flex items-start gap-2">
               <MapPin size={13} className="mt-0.5 shrink-0" aria-hidden="true" />
-              Kathmandu, Nepal
+              Minbhawan, Kathmandu, Nepal
             </p>
             <p className="flex items-center gap-2">
               <Phone size={13} className="shrink-0" aria-hidden="true" />
-              <a href="tel:+97714XXXXXXX" className="hover:text-paper transition-colors">
-                +977 1-XXXXXXX
+              <a href="tel:+97714797183" className="hover:text-paper transition-colors">
+                +977-1-4797183
               </a>
             </p>
             <p className="flex items-center gap-2">
               <Mail size={13} className="shrink-0" aria-hidden="true" />
-              <a href="mailto:info@nayaneducational.com" className="hover:text-paper transition-colors">
-                info@nayaneducational.com
+              <a href="mailto:info@nayanedu.com" className="hover:text-paper transition-colors">
+                info@nayanedu.com
               </a>
             </p>
           </address>
@@ -147,7 +145,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ────────────────────────────────────────────────────── */}
       <div className="border-t border-paper/10">
-        <div className="max-w-6xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-paper/40">
+        <div className="max-w-7xl mx-auto px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-paper/40">
           <p>© {new Date().getFullYear()} Nayan Educational Consultancy. All rights reserved.</p>
           <p>Kathmandu, Nepal · Built with care</p>
         </div>

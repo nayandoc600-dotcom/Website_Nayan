@@ -21,29 +21,33 @@ export const metadata: Metadata = {
   },
   description:
     "Nayan Educational Consultancy helps students in Nepal pursue their study-abroad goals with clarity and confidence.",
-  metadataBase: new URL("https://nayaneducational.com"),
+  metadataBase: new URL("https://www.nayanedu.com"),
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Nayan Educational Consultancy",
-  url: "https://nayaneducational.com",
+  url: "https://www.nayanedu.com",
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   name: "Nayan Educational Consultancy",
-  url: "https://nayaneducational.com",
+  url: "https://www.nayanedu.com",
   description:
     "Nayan Educational Consultancy helps students in Nepal pursue their study-abroad goals with clarity and confidence.",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Minbhawan, near Civil Hospital",
     addressLocality: "Kathmandu",
     addressCountry: "NP",
   },
-  email: "info@nayaneducational.com",
+  email: "info@nayanedu.com",
+  telephone: "+977-1-4797183",
+  foundingDate: "2014",
+  sameAs: ["https://www.facebook.com/nayan.education"],
 };
 
 export default function RootLayout({

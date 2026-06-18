@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { DESTINATIONS, getDestination } from "@/lib/destinations";
+import Flag from "@/components/marketing/Flag";
 import { ArrowLeft } from "lucide-react";
 
 export function generateStaticParams() {
@@ -39,19 +41,19 @@ export default async function DestinationPage({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nayaneducational.com",
+        item: "https://www.nayanedu.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Destinations",
-        item: "https://nayaneducational.com/destinations",
+        item: "https://www.nayanedu.com/destinations",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `Study in ${dest.name}`,
-        item: `https://nayaneducational.com/destinations/${dest.slug}`,
+        item: `https://www.nayanedu.com/destinations/${dest.slug}`,
       },
     ],
   };
@@ -62,29 +64,61 @@ export default async function DestinationPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      {/* Hero */}
-      <section className="bg-paper py-16 px-6 border-b border-sand">
-        <div className="max-w-4xl mx-auto">
+      {/* Hero — photo background with overlay */}
+      <section className="relative px-6 py-20 overflow-hidden">
+        {/* Background image or gradient */}
+        {dest.image ? (
+          <Image
+            src={dest.image}
+            alt={`Study in ${dest.name}`}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(135deg, #0c2a44 0%, #004f84 100%)",
+            }}
+          />
+        )}
+        {/* Dark scrim for legibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(12,42,68,0.95) 0%, rgba(12,42,68,0.7) 55%, rgba(12,42,68,0.5) 100%)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-4xl mx-auto">
           <Link
             href="/destinations"
-            className="inline-flex items-center gap-2 text-sm text-slate hover:text-ink transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm text-paper/80 hover:text-paper transition-colors mb-8"
           >
             <ArrowLeft size={15} /> All destinations
           </Link>
           <div className="flex items-center gap-5 mb-6">
-            <span className="text-6xl" role="img" aria-label={dest.name}>
-              {dest.flag}
-            </span>
+            <Flag
+              code={dest.code}
+              name={dest.name}
+              className="h-12 w-auto rounded shadow-md ring-1 ring-white/30"
+            />
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                 Study Abroad
               </p>
-              <h1 className="font-display text-h1 font-semibold text-ink leading-tight">
+              <h1
+                className="font-display text-h1 font-semibold leading-tight"
+                style={{ color: "#ffffff", textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}
+              >
                 Study in {dest.name}
               </h1>
             </div>
           </div>
-          <p className="text-slate text-lg leading-relaxed max-w-2xl">
+          <p className="text-paper/90 text-lg leading-relaxed max-w-2xl">
             {dest.description}
           </p>
         </div>

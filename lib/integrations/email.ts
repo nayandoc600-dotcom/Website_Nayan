@@ -15,8 +15,8 @@ type ContactPayload = {
 export async function sendContactNotification(data: ContactPayload): Promise<void> {
   try {
     await resend.emails.send({
-      from: "Nayan Website <noreply@nayaneducational.com>",
-      to: "info@nayaneducational.com",
+      from: "Nayan Website <noreply@nayanedu.com>",
+      to: "info@nayanedu.com",
       replyTo: data.email,
       subject: `New enquiry from ${data.name}`,
       html: `
@@ -30,7 +30,7 @@ export async function sendContactNotification(data: ContactPayload): Promise<voi
             <tr><td style="padding:8px 0;color:#5C6B79;vertical-align:top">Message</td><td style="padding:8px 0;color:#0C2A44">${data.message.replace(/\n/g, "<br>")}</td></tr>
           </table>
           <hr style="border:1px solid #ECE3D2;margin:24px 0">
-          <p style="color:#5C6B79;font-size:12px">Submitted via nayaneducational.com</p>
+          <p style="color:#5C6B79;font-size:12px">Submitted via nayanedu.com</p>
         </div>
       `,
     });

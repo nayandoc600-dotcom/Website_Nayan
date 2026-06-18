@@ -3,82 +3,119 @@ export type Destination = {
   name: string;
   tagline: string;
   flag: string;
+  /** ISO 3166-1 alpha-2 code (lowercase) for flag images via flagcdn.com */
+  code: string;
+  /** Hero/card photo in /public. Optional — falls back to a gradient. */
+  image?: string;
   highlights: string[];
   description: string;
 };
 
 export const DESTINATIONS: Destination[] = [
   {
-    slug: "japan",
-    name: "Japan",
-    flag: "🇯🇵",
-    tagline: "World-class universities, rich culture, scholarship opportunities.",
-    highlights: ["MEXT Scholarship", "Language support", "Part-time work rights"],
+    slug: "australia",
+    name: "Australia",
+    flag: "🇦🇺",
+    code: "au",
+    image: "/australia.jpg",
+    tagline: "World-class education with post-study work rights up to 6 years.",
+    highlights: [
+      "Post-study work visa up to 6 years",
+      "70,000+ Nepalese students",
+      "Scholarships & part-time work",
+    ],
     description:
-      "Japan offers excellent academic institutions and generous government scholarships. With strong demand for international students and a high quality of life, it remains one of Nepal's most popular study destinations.",
+      "Australia is one of the top study destinations for Nepalese students, with over 70,000 currently enrolled. It offers a world-class education system, a strong support network for international students, and a multicultural society that makes it easy to adapt. With a post-study work visa of up to six years, generous scholarships, part-time work opportunities, and a safe living environment, Australia is a top choice for quality education and global exposure.",
   },
   {
     slug: "united-kingdom",
     name: "United Kingdom",
     flag: "🇬🇧",
-    tagline: "Russell Group universities and a global graduate network.",
-    highlights: ["Graduate Route visa", "1–2 year programmes", "Global reputation"],
+    code: "gb",
+    image: "/uk.jpg",
+    tagline: "Globally recognised degrees and shorter, faster courses.",
+    highlights: [
+      "World-class universities — Oxford, Cambridge",
+      "Shorter degrees — 3-year BA, 1-year MA",
+      "Post-study work visa up to 2 years",
+    ],
     description:
-      "The UK's top universities are globally recognised, and the Graduate Route visa allows graduates to stay and work for two years after completing their degree.",
-  },
-  {
-    slug: "australia",
-    name: "Australia",
-    flag: "🇦🇺",
-    tagline: "Post-study work rights up to 6 years in a welcoming country.",
-    highlights: ["485 Work visa", "Safe & multicultural", "Strong STEM & health programmes"],
-    description:
-      "Australia's Group of Eight universities rank among the world's best. Generous post-study work rights and a welcoming immigration pathway make it a top choice.",
-  },
-  {
-    slug: "canada",
-    name: "Canada",
-    flag: "🇨🇦",
-    tagline: "Clear immigration pathway with PR potential after graduation.",
-    highlights: ["PGWP up to 3 years", "PR pathway", "Bilingual environment"],
-    description:
-      "Canada combines high-quality education with one of the clearest routes to permanent residency. The Post-Graduation Work Permit makes it attractive for long-term settlement.",
-  },
-  {
-    slug: "usa",
-    name: "USA",
-    flag: "🇺🇸",
-    tagline: "Ivy League to state universities — unmatched academic breadth.",
-    highlights: ["F-1 visa OPT", "Research opportunities", "Campus life"],
-    description:
-      "The United States hosts the world's largest number of top-ranked universities. OPT allows graduates to work for up to three years after graduation in STEM fields.",
-  },
-  {
-    slug: "south-korea",
-    name: "South Korea",
-    flag: "🇰🇷",
-    tagline: "Affordable tuition, STEM excellence, growing global profile.",
-    highlights: ["GKS Scholarship", "Affordable living", "Tech & engineering"],
-    description:
-      "South Korea is rising rapidly in global rankings, offering excellent STEM and business programmes at competitive costs. The Korean Government Scholarship is highly sought after.",
-  },
-  {
-    slug: "germany",
-    name: "Germany",
-    flag: "🇩🇪",
-    tagline: "Free or low-cost tuition at world-renowned public universities.",
-    highlights: ["Tuition-free public unis", "Engineering hub", "18-month job seeker visa"],
-    description:
-      "Germany's public universities charge little to no tuition even for international students. The 18-month job-seeker visa is a major draw for graduates.",
+      "The UK is known for its prestigious education system and globally recognised degrees. Nepalese students benefit from shorter course durations — three years for a bachelor's degree and one year for a master's — saving both time and money. With world-class universities like Oxford and Cambridge, a strong job market, and a post-study work visa of up to two years, the UK remains a leading choice.",
   },
   {
     slug: "new-zealand",
     name: "New Zealand",
     flag: "🇳🇿",
-    tagline: "Stunning landscapes, safe campuses, strong post-study rights.",
-    highlights: ["Open Work Visa for partner", "Safe environment", "3-year PGWP"],
+    code: "nz",
+    image: "/newzealand.jpg",
+    tagline: "Practical, research-led education in a stable, welcoming country.",
+    highlights: [
+      "Research & practice-oriented learning",
+      "Low cost of living",
+      "Stable economy & government",
+    ],
     description:
-      "New Zealand universities consistently rank highly for student experience. The post-study work visa and the country's safe, welcoming reputation make it a rising destination.",
+      "New Zealand is best known for its research- and practice-oriented education system. With an incredibly stable economy, a low cost of living, and a stable government, it is a safe and welcoming destination for international students. The academic year runs from February to November, with a long summer break and most universities operating on a two-semester system.",
+  },
+  {
+    slug: "usa",
+    name: "USA",
+    flag: "🇺🇸",
+    code: "us",
+    image: "/usa.jpg",
+    tagline: "The world's largest, most flexible higher-education system.",
+    highlights: [
+      "4,000+ universities incl. Ivy League",
+      "Flexible majors & course choice",
+      "STEM graduates work up to 3 years on OPT",
+    ],
+    description:
+      "The United States has the world's largest higher education system, offering flexibility in choosing majors and courses tailored to individual interests. Nepalese students gain access to cutting-edge research, technological advancement, and high-paying job opportunities. With over 4,000 universities — including Ivy League institutions — and STEM graduates able to work up to three years under OPT, the U.S. is a global innovation hub.",
+  },
+  {
+    slug: "canada",
+    name: "Canada",
+    flag: "🇨🇦",
+    code: "ca",
+    image: "/canada.jpg",
+    tagline: "Affordable study with a clear pathway to permanent residency.",
+    highlights: [
+      "Work 20 hrs/week (40 in breaks)",
+      "PR pathway via PGWP",
+      "Safe & multicultural",
+    ],
+    description:
+      "Canada is highly attractive to Nepalese students due to its affordable tuition fees, high standard of living, and student-friendly policies. Known for its safety, welcoming environment, and strong economy, Canada offers excellent opportunities for students looking to build a secure future — including up to 20 hours of work per week during studies (40 during breaks) and a clear PR pathway through the Post-Graduation Work Permit (PGWP).",
+  },
+  {
+    slug: "europe",
+    name: "Europe",
+    flag: "🇪🇺",
+    code: "eu",
+    image: "/europe.jpg",
+    tagline: "Affordable or tuition-free degrees across Germany, France & more.",
+    highlights: [
+      "Affordable or tuition-free public universities",
+      "Engineering, Business, IT & Hospitality",
+      "Post-study work & residency pathways",
+    ],
+    description:
+      "Several European countries — including Germany, France, the Netherlands, Finland, and Norway — have become popular among Nepalese students. Many public universities offer affordable or even tuition-free education, making Europe a cost-effective study destination. Students can explore specialised programs in Engineering, Business, IT, and Hospitality, with access to research-intensive courses. Many European nations also provide post-study work opportunities and pathways to residency.",
+  },
+  {
+    slug: "japan",
+    name: "Japan",
+    flag: "🇯🇵",
+    code: "jp",
+    image: "/japan.jpg",
+    tagline: "Advanced, safe, and full of scholarships — study and earn in Japan.",
+    highlights: [
+      "60,000+ Nepalese students",
+      "Government & university scholarships",
+      "Learn & earn — part-time work",
+    ],
+    description:
+      "With its advanced infrastructure, disciplined work culture, and safe living environment, Japan is an excellent choice for Nepalese students seeking quality education and job prospects. A growing community of over 60,000 Nepalese students, high scholarship availability from both government and universities, and strong demand for IT, Engineering, and Business graduates make Japan especially attractive — with the chance to work part-time while studying.",
   },
 ];
 

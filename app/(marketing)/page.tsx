@@ -18,7 +18,7 @@ const destinationsJsonLd = {
     "@type": "ListItem",
     position: i + 1,
     name: `Study in ${d.name}`,
-    url: `https://nayaneducational.com/destinations/${d.slug}`,
+    url: `https://www.nayanedu.com/destinations/${d.slug}`,
   })),
 };
 
