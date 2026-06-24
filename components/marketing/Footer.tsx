@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Globe, MessageCircle, Rss, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const PAGES = [
   { label: "Home", href: "/" },
@@ -15,10 +15,14 @@ const RESOURCES = [
   { label: "News & Updates", href: "/news" },
 ];
 
-// lucide-react v1.x removed brand icons; swap for real brand icons when available
+/*
+ * SVG files live in /public. Colored via CSS mask so they match the footer.
+ * TODO: replace the placeholder hrefs with the real social links before launch.
+ */
 const SOCIALS = [
-  { Icon: Globe, label: "Website", href: "https://www.nayanedu.com" },
-  { Icon: MessageCircle, label: "Facebook", href: "https://www.facebook.com/nayan.education" },
+  { src: "/fb.svg", label: "Facebook", href: "https://www.facebook.com/nayan.education" },
+  { src: "/insta.svg", label: "Instagram", href: "https://www.instagram.com/nayaneducational" },
+  { src: "/tiktok.svg", label: "TikTok", href: "https://www.tiktok.com/@nayaneducation" },
 ] as const;
 
 export default function Footer() {
@@ -27,7 +31,7 @@ export default function Footer() {
       {/* ── Tagline banner ────────────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-8 pt-5 pb-1 text-center">
         <p className="font-display text-lg md:text-xl lg:text-2xl font-semibold text-paper leading-tight">
-          A Decade Long Quest <em>For Excellence</em>
+          A Decade Long <em>Quest For Excellence</em>
         </p>
       </div>
 
@@ -38,7 +42,7 @@ export default function Footer() {
           <Link href="/" aria-label="Nayan Educational Consultancy — home" className="inline-flex mb-3">
             <span className="bg-paper/90 rounded-md px-2 py-1 inline-flex">
               <Image
-                src="/logo.jpeg"
+                src="/main-logo.png"
                 alt="Nayan Educational Consultancy"
                 width={90}
                 height={30}
@@ -52,7 +56,7 @@ export default function Footer() {
             Study abroad with confidence.
           </p>
 
-          <address className="not-italic space-y-1 text-sm text-paper/60 mb-3">
+          <address className="not-italic space-y-1 text-sm text-paper/60">
             <p className="flex items-start gap-2">
               <MapPin size={13} className="mt-0.5 shrink-0" aria-hidden="true" />
               Minbhawan, Kathmandu, Nepal
@@ -70,21 +74,6 @@ export default function Footer() {
               </a>
             </p>
           </address>
-
-          {/* Social icons */}
-          <div className="flex gap-1.5" role="list" aria-label="Social media links">
-            {SOCIALS.map(({ Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                role="listitem"
-                aria-label={label}
-                className="p-1.5 rounded-md text-paper/50 hover:text-paper hover:bg-paper/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass"
-              >
-                <Icon size={16} aria-hidden="true" />
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* ── Pages ──────────────────────────────────────────────────────── */}
@@ -125,7 +114,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* ── CTA block ──────────────────────────────────────────────────── */}
+        {/* ── CTA block (with social icons below the button) ─────────────── */}
         <div className="flex flex-col">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-paper/40 mb-3">
             Begin Your Journey
@@ -140,6 +129,37 @@ export default function Footer() {
           >
             Book a Free Session
           </Link>
+
+          {/* Social icons — under the button, right-aligned */}
+          <div className="flex justify-end gap-2.5 mt-4" role="list" aria-label="Social media links">
+            {SOCIALS.map(({ src, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                role="listitem"
+                aria-label={label}
+                className="p-1.5 rounded-md text-paper/50 hover:text-paper hover:bg-paper/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass"
+              >
+                <span
+                  className="block h-[18px] w-[18px]"
+                  style={{
+                    backgroundColor: "currentColor",
+                    WebkitMaskImage: `url(${src})`,
+                    maskImage: `url(${src})`,
+                    WebkitMaskRepeat: "no-repeat",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    maskPosition: "center",
+                    WebkitMaskSize: "contain",
+                    maskSize: "contain",
+                  }}
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

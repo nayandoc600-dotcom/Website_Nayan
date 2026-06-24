@@ -88,19 +88,19 @@ export const DESTINATIONS: Destination[] = [
       "Canada is highly attractive to Nepalese students due to its affordable tuition fees, high standard of living, and student-friendly policies. Known for its safety, welcoming environment, and strong economy, Canada offers excellent opportunities for students looking to build a secure future — including up to 20 hours of work per week during studies (40 during breaks) and a clear PR pathway through the Post-Graduation Work Permit (PGWP).",
   },
   {
-    slug: "europe",
-    name: "Europe",
-    flag: "🇪🇺",
-    code: "eu",
-    image: "/europe.jpg",
-    tagline: "Affordable or tuition-free degrees across Germany, France & more.",
+    slug: "malta",
+    name: "Malta",
+    flag: "🇲🇹",
+    code: "mt",
+    image: "/malta.jpg",
+    tagline: "English-speaking EU island with affordable, quality education.",
     highlights: [
-      "Affordable or tuition-free public universities",
-      "Engineering, Business, IT & Hospitality",
-      "Post-study work & residency pathways",
+      "English-speaking EU country",
+      "Affordable tuition & living",
+      "Schengen access & work rights",
     ],
     description:
-      "Several European countries — including Germany, France, the Netherlands, Finland, and Norway — have become popular among Nepalese students. Many public universities offer affordable or even tuition-free education, making Europe a cost-effective study destination. Students can explore specialised programs in Engineering, Business, IT, and Hospitality, with access to research-intensive courses. Many European nations also provide post-study work opportunities and pathways to residency.",
+      "Malta is an increasingly popular destination for Nepalese students, combining English-medium education with the advantages of EU membership. As an English-speaking country, students adapt quickly without a language barrier, while affordable tuition and a lower cost of living make it a budget-friendly choice. With Schengen access, a safe Mediterranean lifestyle, and part-time work opportunities alongside studies, Malta offers a well-rounded pathway to a European education.",
   },
   {
     slug: "japan",
@@ -116,6 +116,21 @@ export const DESTINATIONS: Destination[] = [
     ],
     description:
       "With its advanced infrastructure, disciplined work culture, and safe living environment, Japan is an excellent choice for Nepalese students seeking quality education and job prospects. A growing community of over 60,000 Nepalese students, high scholarship availability from both government and universities, and strong demand for IT, Engineering, and Business graduates make Japan especially attractive — with the chance to work part-time while studying.",
+  },
+  {
+    slug: "europe",
+    name: "Europe",
+    flag: "🇪🇺",
+    code: "eu",
+    image: "/europe.jpg",
+    tagline: "Affordable or tuition-free degrees across Germany, France & more.",
+    highlights: [
+      "Affordable or tuition-free public universities",
+      "Engineering, Business, IT & Hospitality",
+      "Post-study work & residency pathways",
+    ],
+    description:
+      "Several European countries — including Germany, France, the Netherlands, Finland, and Norway — have become popular among Nepalese students. Many public universities offer affordable or even tuition-free education, making Europe a cost-effective study destination. Students can explore specialised programs in Engineering, Business, IT, and Hospitality, with access to research-intensive courses. Many European nations also provide post-study work opportunities and pathways to residency.",
   },
 ];
 
