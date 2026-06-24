@@ -66,6 +66,7 @@ export async function uploadStudyMaterial(
   if (dbError) return { ok: false, error: dbError.message };
 
   revalidatePath("/admin/study-materials");
+  revalidatePath("/study-materials");
   return { ok: true };
 }
 
@@ -80,4 +81,5 @@ export async function deleteStudyMaterial(id: string): Promise<void> {
   if (error) { console.error("deleteStudyMaterial:", error.message); return; }
 
   revalidatePath("/admin/study-materials");
+  revalidatePath("/study-materials");
 }

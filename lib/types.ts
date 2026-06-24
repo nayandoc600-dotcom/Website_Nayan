@@ -21,6 +21,7 @@ export type PopupNotice = {
   cta_label: string | null;
   cta_url: string | null;
   image_url: string | null;
+  pdf_url: string | null;
   active: boolean;
   updated_at: string;
 };

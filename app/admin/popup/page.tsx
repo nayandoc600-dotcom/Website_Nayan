@@ -17,7 +17,13 @@ export default async function PopupAdminPage() {
           ? "A popup is currently active and showing to visitors."
           : "No popup is currently active."}
       </p>
-      <PopupForm action={upsertPopup} notice={notice} />
+      {/* key on updated_at forces the form to remount with fresh defaults
+          after each save, so the radio/fields reflect the saved state. */}
+      <PopupForm
+        key={notice?.updated_at ?? "new"}
+        action={upsertPopup}
+        notice={notice}
+      />
     </div>
   );
 }

@@ -32,8 +32,8 @@ insert into testimonials (name, role, body, approved) values
 -- Popup notice
 insert into popup_notice (title, body, cta_label, cta_url, active) values
   (
-    'Intake 2025 Applications Open',
-    'Early applications for the September 2025 intake are now open. Book a free counselling session before slots fill up.',
+    'September 2026 Intake — Applications Open',
+    'Applications for the September 2026 intake are now open, with limited slots for the January 2027 intake. Book a free counselling session before deadlines approach.',
     'Book a Session',
     '/contact',
     true

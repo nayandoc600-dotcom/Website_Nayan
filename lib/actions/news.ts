@@ -60,6 +60,7 @@ export async function createNewsPost(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/admin/news");
+  revalidatePath("/news");
   redirect("/admin/news");
 }
 
@@ -86,7 +87,7 @@ export async function updateNewsPost(
   const supabase = createServiceClient();
   const existing = await supabase
     .from("news_posts")
-    .select("published, published_at")
+    .select("published, published_at, slug")
     .eq("id", id!)
     .maybeSingle();
 
@@ -104,6 +105,8 @@ export async function updateNewsPost(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/admin/news");
+  revalidatePath("/news");
+  if (existing.data?.slug) revalidatePath(`/news/${existing.data.slug}`);
   return { ok: true };
 }
 
@@ -114,8 +117,17 @@ export async function deleteNewsPost(id: string): Promise<void> {
   if (!z.string().uuid().safeParse(id).success) return;
 
   const supabase = createServiceClient();
+  // Grab the slug first so we can revalidate the public post page too
+  const { data: row } = await supabase
+    .from("news_posts")
+    .select("slug")
+    .eq("id", id)
+    .maybeSingle();
+
   const { error } = await supabase.from("news_posts").delete().eq("id", id);
   if (error) { console.error("deleteNewsPost:", error.message); return; }
 
   revalidatePath("/admin/news");
+  revalidatePath("/news");
+  if (row?.slug) revalidatePath(`/news/${row.slug}`);
 }

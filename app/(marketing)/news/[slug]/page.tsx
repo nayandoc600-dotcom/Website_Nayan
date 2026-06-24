@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getPublishedNewsPosts, getNewsPost } from "@/lib/data/news";
+import { getPublishedNewsSlugs, getNewsPost } from "@/lib/data/news";
 
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const posts = await getPublishedNewsPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  const slugs = await getPublishedNewsSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

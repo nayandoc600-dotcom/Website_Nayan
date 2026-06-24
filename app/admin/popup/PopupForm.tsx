@@ -9,8 +9,9 @@ type UpsertAction = typeof upsertPopup;
 
 const FIELD =
   "rounded-md border border-sand bg-paper px-3 py-2 text-sm text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent";
-const LABEL =
-  "text-xs font-medium text-slate uppercase tracking-wide";
+const LABEL = "text-xs font-medium text-slate uppercase tracking-wide";
+const FILE =
+  "text-sm text-slate file:mr-3 file:rounded-md file:border-0 file:bg-brand file:text-paper file:px-3 file:py-1.5 file:text-xs file:font-medium hover:file:bg-ink file:transition-colors";
 
 export default function PopupForm({
   action,
@@ -26,43 +27,94 @@ export default function PopupForm({
       {notice && <input type="hidden" name="id" value={notice.id} />}
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="title" className={LABEL}>Title</label>
+        <label htmlFor="title" className={LABEL}>Title (optional)</label>
         <input
           id="title"
           name="title"
           type="text"
-          required
           defaultValue={notice?.title ?? ""}
           className={FIELD}
-          placeholder="Intake 2025 Applications Open"
+          placeholder="September 2026 Intake — Applications Open"
         />
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="body" className={LABEL}>Body</label>
+        <label htmlFor="body" className={LABEL}>Body (optional)</label>
         <textarea
           id="body"
           name="body"
           rows={3}
-          required
           defaultValue={notice?.body ?? ""}
           className={`${FIELD} resize-y`}
           placeholder="Describe the notice in 1–2 sentences…"
         />
       </div>
 
+      <p className="-mt-2 text-xs text-slate">
+        Title and body are optional — a popup can be just an image or a PDF.
+      </p>
+
+      {/* Image upload */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="image_url" className={LABEL}>Image URL (optional)</label>
+        <label htmlFor="image" className={LABEL}>
+          Image (optional · JPEG, PNG, WebP · max 5 MB)
+        </label>
+        {notice?.image_url && (
+          <div className="flex items-center gap-3 mb-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={notice.image_url}
+              alt="Current popup image"
+              className="h-14 w-auto rounded border border-sand object-cover"
+            />
+            <label className="flex items-center gap-1.5 text-xs text-slate cursor-pointer">
+              <input type="checkbox" name="remove_image" className="accent-brand" />
+              Remove current image
+            </label>
+          </div>
+        )}
         <input
-          id="image_url"
-          name="image_url"
-          type="url"
-          defaultValue={notice?.image_url ?? ""}
-          className={FIELD}
-          placeholder="https://example.com/banner.jpg"
+          id="image"
+          name="image"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className={FILE}
         />
         <p className="text-xs text-slate">
-          Paste the full URL of an image to display above the popup text.
+          Shown above the popup text. Upload a new file to replace the current one.
+        </p>
+      </div>
+
+      {/* PDF upload */}
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="pdf" className={LABEL}>
+          PDF (optional · max 10 MB)
+        </label>
+        {notice?.pdf_url && (
+          <div className="flex items-center gap-3 mb-1">
+            <a
+              href={notice.pdf_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-brand hover:underline"
+            >
+              View current PDF
+            </a>
+            <label className="flex items-center gap-1.5 text-xs text-slate cursor-pointer">
+              <input type="checkbox" name="remove_pdf" className="accent-brand" />
+              Remove current PDF
+            </label>
+          </div>
+        )}
+        <input
+          id="pdf"
+          name="pdf"
+          type="file"
+          accept="application/pdf"
+          className={FILE}
+        />
+        <p className="text-xs text-slate">
+          Visitors can open or download it from the popup (e.g. a brochure).
         </p>
       </div>
 

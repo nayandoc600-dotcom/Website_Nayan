@@ -30,7 +30,6 @@ export default function MaterialUploadForm({
       ref={formRef}
       action={formAction}
       className="bg-sky rounded-xl border border-sand p-6"
-      encType="multipart/form-data"
     >
       <h2 className="font-semibold text-ink text-sm mb-4">Upload New Material</h2>
       <div className="grid sm:grid-cols-2 gap-4">

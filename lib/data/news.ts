@@ -1,9 +1,14 @@
 import "server-only";
-import { createClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/service";
 import type { NewsPost } from "@/lib/types";
 
+// These read public, published content and run in contexts that have no HTTP
+// request (e.g. generateStaticParams at build time), so they use the cookie-free
+// service client rather than the SSR (cookie-based) client. The `published`
+// filter keeps the result limited to publicly visible posts.
+
 export async function getPublishedNewsPosts(): Promise<NewsPost[]> {
-  const supabase = await createClient();
+  const supabase = createServiceClient();
   const { data, error } = await supabase
     .from("news_posts")
     .select("*")
@@ -17,15 +22,32 @@ export async function getPublishedNewsPosts(): Promise<NewsPost[]> {
   return data ?? [];
 }
 
+export async function getPublishedNewsSlugs(): Promise<string[]> {
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("news_posts")
+    .select("slug")
+    .eq("published", true);
+
+  if (error) {
+    console.error("getPublishedNewsSlugs:", error.message);
+    return [];
+  }
+  return (data ?? []).map((r) => r.slug);
+}
+
 export async function getNewsPost(slug: string): Promise<NewsPost | null> {
-  const supabase = await createClient();
+  const supabase = createServiceClient();
   const { data, error } = await supabase
     .from("news_posts")
     .select("*")
     .eq("slug", slug)
     .eq("published", true)
-    .single();
+    .maybeSingle();
 
-  if (error) return null;
+  if (error) {
+    console.error("getNewsPost:", error.message);
+    return null;
+  }
   return data;
 }
