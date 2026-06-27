@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow the dev server's HMR/JS chunks to load when the site is opened over
+  // the local network (e.g. another device on Wi-Fi) instead of localhost.
+  // Without this, Next.js blocks cross-origin dev resources and interactive
+  // components (slider, popup ads) silently fail to hydrate.
+  allowedDevOrigins: ["172.27.240.1", "192.168.*.*", "10.0.*.*"],
   images: {
     // In local dev, Supabase Storage runs on 127.0.0.1 — a private IP that
     // Next.js refuses to optimize (SSRF protection). Skip optimization in dev;

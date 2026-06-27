@@ -10,6 +10,7 @@ import {
   Bell,
   Newspaper,
   BookOpen,
+  Inbox,
   LogOut,
 } from "lucide-react";
 
@@ -20,6 +21,7 @@ const NAV = [
   { label: "Popup Notice", href: "/admin/popup", icon: Bell },
   { label: "News Posts", href: "/admin/news", icon: Newspaper },
   { label: "Study Materials", href: "/admin/study-materials", icon: BookOpen },
+  { label: "Queries", href: "/admin/queries", icon: Inbox },
 ] as const;
 
 export default function AdminNav({ email }: { email: string }) {

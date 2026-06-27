@@ -106,7 +106,7 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                   Office Hours
                 </p>
-                <p className="text-ink">Sun – Fri: 9:00 AM – 6:00 PM NPT</p>
+                <p className="text-ink">Sun – Fri: 8:00 AM – 5:00 PM NPT</p>
               </div>
             </div>
           </div>

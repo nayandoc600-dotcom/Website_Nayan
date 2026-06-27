@@ -54,3 +54,9 @@ export type ContactSubmission = {
   message: string;
   consented: boolean;
 };
+
+// A stored contact_submissions row, as read by the admin panel.
+export type ContactSubmissionRow = ContactSubmission & {
+  id: string;
+  created_at: string;
+};

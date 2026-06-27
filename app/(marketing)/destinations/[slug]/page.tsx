@@ -107,7 +107,10 @@ export default async function DestinationPage({
               className="h-12 w-auto rounded shadow-md ring-1 ring-white/30"
             />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
+              <p
+                className="text-xs font-semibold uppercase tracking-widest mb-1"
+                style={{ color: "#ffba4d" }}
+              >
                 Study Abroad
               </p>
               <h1

@@ -52,14 +52,14 @@ export default function Footer() {
           </Link>
 
           <p className="text-sm leading-relaxed mb-3 max-w-xs">
-            Helping students in Nepal see their future clearly — and reach it.
-            Study abroad with confidence.
+            We make student's dreams of studying abroad a reality. With over a decade of experience, we provide expert guidance and support.
+            <b> Study abroad with confidence!</b>
           </p>
 
           <address className="not-italic space-y-1 text-sm text-paper/60">
             <p className="flex items-start gap-2">
               <MapPin size={13} className="mt-0.5 shrink-0" aria-hidden="true" />
-              Minbhawan, Kathmandu, Nepal
+              Minbhawan, Baneshwor, Kathmandu, Nepal
             </p>
             <p className="flex items-center gap-2">
               <Phone size={13} className="shrink-0" aria-hidden="true" />
@@ -121,7 +121,7 @@ export default function Footer() {
           </h3>
           <p className="text-sm text-paper/60 leading-relaxed mb-4">
             A free 30-minute counselling session with one of our advisors.
-            No pressure — just clarity.
+            No pressure, just clarity!
           </p>
           <Link
             href="/contact"

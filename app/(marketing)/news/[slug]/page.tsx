@@ -46,18 +46,20 @@ export default async function NewsPostPage({
     <>
       <section className="bg-paper py-16 px-6 border-b border-sand">
         <div className="max-w-3xl mx-auto">
-          <Link
-            href="/news"
-            className="inline-flex items-center gap-2 text-sm text-slate hover:text-ink transition-colors mb-8"
-          >
-            <ArrowLeft size={15} /> All news
-          </Link>
-          <time
-            dateTime={post.published_at ?? post.created_at}
-            className="text-xs text-slate uppercase tracking-widest"
-          >
-            {publishedDate}
-          </time>
+          <div className="flex items-center justify-between mb-8">
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-2 text-sm text-slate hover:text-ink transition-colors"
+            >
+              <ArrowLeft size={15} /> All news
+            </Link>
+            <time
+              dateTime={post.published_at ?? post.created_at}
+              className="text-xs text-slate uppercase tracking-widest"
+            >
+              {publishedDate}
+            </time>
+          </div>
           <h1 className="font-display text-h1 font-semibold text-ink leading-tight mt-2 mb-4">
             {post.title}
           </h1>

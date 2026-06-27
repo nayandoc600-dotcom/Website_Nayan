@@ -22,8 +22,15 @@ export default async function StudyMaterialsPage() {
 
   return (
     <>
-      <section className="bg-paper py-16 px-6 border-b border-sand">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="relative overflow-hidden bg-paper py-16 px-6 border-b border-sand">
+        <img
+          src="/study_materials.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-paper/40" aria-hidden="true" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-3">
             Free Resources
           </p>
@@ -31,7 +38,7 @@ export default async function StudyMaterialsPage() {
             Study Materials
           </h1>
           <p className="text-slate text-lg leading-relaxed">
-            Guides, brochures, and preparation resources — free to download. New
+            Guides, brochures, and preparation resources, <b>free to download</b>. New
             materials are added regularly.
           </p>
         </div>
