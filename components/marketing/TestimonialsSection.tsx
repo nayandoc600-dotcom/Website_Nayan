@@ -42,6 +42,19 @@ export default function TestimonialsSection({
     return () => { emblaApi.off("select", onSelect); };
   }, [emblaApi]);
 
+  // When the testimonial set changes (e.g. an admin hides a review and the page
+  // revalidates with fewer slides), Embla's measurements, snap points, and
+  // selected index go stale — causing blank/misaligned slides and a wrong dot
+  // count. Re-initialise the carousel and recompute the snaps so the UI stays
+  // consistent. Keyed on the slide ids so it only runs on real changes.
+  const slideKey = testimonials.map((t) => t.id).join(",");
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.reInit();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi, slideKey]);
+
   // Pause autoplay when any element inside the carousel receives focus
   const handleFocus = useCallback(() => {
     if (prefersReduced) return;

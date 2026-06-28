@@ -39,7 +39,7 @@ export default async function VisaApprovalsAdminPage() {
             return (
               <div
                 key={a.id}
-                className="rounded-xl border border-sand bg-sky p-4 flex flex-col gap-3"
+                className="rounded-xl border border-sand bg-sky p-4 flex flex-col gap-3 h-full"
               >
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-paper">
                   <Image
@@ -50,10 +50,12 @@ export default async function VisaApprovalsAdminPage() {
                     sizes="300px"
                   />
                 </div>
-                <div className="flex items-center justify-between gap-2 text-xs">
-                  <div>
+                {/* mt-auto pins this row to the bottom; items-end keeps the
+                    Delete button on the same baseline across every card. */}
+                <div className="mt-auto flex items-end justify-between gap-2 text-xs">
+                  <div className="min-w-0">
                     {a.student && (
-                      <p className="font-medium text-ink">{a.student}</p>
+                      <p className="font-medium text-ink truncate">{a.student}</p>
                     )}
                     <p className="text-slate">
                       {new Date(a.created_at).toLocaleDateString()}
@@ -64,8 +66,16 @@ export default async function VisaApprovalsAdminPage() {
                       )}
                     </p>
                   </div>
-                  <form action={deleteVisaApproval.bind(null, a.id)}>
-                    <SubmitButton label="Delete" pendingLabel="…" variant="danger" />
+                  <form
+                    action={deleteVisaApproval.bind(null, a.id)}
+                    className="shrink-0"
+                  >
+                    <SubmitButton
+                      label="Delete"
+                      pendingLabel="…"
+                      variant="danger"
+                      className="text-xs px-3 py-1.5"
+                    />
                   </form>
                 </div>
               </div>

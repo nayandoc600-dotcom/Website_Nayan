@@ -52,13 +52,14 @@ export async function uploadStudyMaterial(
 
   const { data: signedData } = await supabase.storage
     .from("study-materials")
-    .createSignedUrl(path, 60 * 60 * 24 * 365 * 10); // 10-year signed URL
+    .createSignedUrl(path, 60 * 60 * 24 * 365 * 10); // 10-year fallback URL
 
   const file_url = signedData?.signedUrl ?? path;
 
   const { error: dbError } = await supabase.from("study_materials").insert({
     title,
     file_url,
+    storage_path: path, // lets us mint fresh short-lived URLs on download
     country,
     size_bytes: file.size,
   });

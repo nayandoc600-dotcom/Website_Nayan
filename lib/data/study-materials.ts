@@ -1,11 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
-import type { StudyMaterial } from "@/lib/types";
+import type { PublicStudyMaterial } from "@/lib/types";
 
-export async function getStudyMaterials(): Promise<StudyMaterial[]> {
+// Public listing — deliberately excludes file_url / storage_path so the browser
+// never receives a direct download link. Access is granted only through the
+// lead-gated server action, which mints a short-lived signed URL.
+export async function getStudyMaterials(): Promise<PublicStudyMaterial[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("study_materials")
-    .select("*")
+    .select("id, title, country, size_bytes, created_at")
     .order("created_at", { ascending: false });
 
   if (error) {

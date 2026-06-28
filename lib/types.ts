@@ -41,8 +41,33 @@ export type StudyMaterial = {
   id: string;
   title: string;
   file_url: string;
+  storage_path: string | null;
   country: string | null;
   size_bytes: number | null;
+  created_at: string;
+};
+
+// Public-facing study material — never exposes the file URL/path. The download
+// URL is minted server-side only after a lead form is completed.
+export type PublicStudyMaterial = {
+  id: string;
+  title: string;
+  country: string | null;
+  size_bytes: number | null;
+  created_at: string;
+};
+
+export type StudyMaterialLead = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  preferred_country: string | null;
+  qualification: string | null;
+  material_id: string | null;
+  material_title: string | null;
+  ip_hash: string | null;
+  user_agent: string | null;
   created_at: string;
 };
 

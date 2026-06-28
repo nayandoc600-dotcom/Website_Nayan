@@ -92,9 +92,15 @@ export async function submitContact(
     return { status: "error", error: "Something went wrong. Please try again." };
   }
 
-  // Mirror to Sheets + notify via email — non-blocking, failures are logged
+  // Mirror to Sheets + notify via email — non-blocking, failures are logged.
+  // The email includes the raw IP + submission time (admin-only); the DB only
+  // ever stores the hashed IP.
   void Promise.allSettled([
-    sendContactNotification(fields),
+    sendContactNotification({
+      ...fields,
+      ip: ip === "unknown" ? null : ip,
+      submittedAt: new Date().toISOString(),
+    }),
     appendToSheet(fields),
   ]);
 
