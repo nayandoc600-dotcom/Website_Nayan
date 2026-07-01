@@ -12,6 +12,8 @@ import {
   BookOpen,
   Inbox,
   Users,
+  UserRound,
+  Image as ImageIcon,
   LogOut,
 } from "lucide-react";
 
@@ -22,6 +24,8 @@ const NAV = [
   { label: "Popup Notice", href: "/admin/popup", icon: Bell },
   { label: "News Posts", href: "/admin/news", icon: Newspaper },
   { label: "Study Materials", href: "/admin/study-materials", icon: BookOpen },
+  { label: "Team", href: "/admin/team", icon: UserRound },
+  { label: "Gallery", href: "/admin/gallery", icon: ImageIcon },
   { label: "Material Leads", href: "/admin/material-leads", icon: Users },
   { label: "Queries", href: "/admin/queries", icon: Inbox },
 ] as const;

@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTeamMembers } from "@/lib/data/team";
+import { getGalleryPhotos } from "@/lib/data/gallery";
+import TeamSection from "@/components/marketing/TeamSection";
+import GallerySection from "@/components/marketing/GallerySection";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Nayan Educational Consultancy — established 2014 in Minbhawan, Kathmandu. Over a decade helping Nepali students study abroad with clarity and confidence.",
 };
+
+export const revalidate = 3600;
 
 const SERVICES = [
   "Test Preparation — IELTS, PTE, Duolingo",
@@ -21,22 +27,12 @@ const SERVICES = [
   "Part-Time Work Guidance",
 ] as const;
 
-const VALUES = [
-  {
-    title: "Clarity",
-    body: "We demystify the study-abroad process — from shortlisting courses to understanding visa timelines — so students make informed decisions, not anxious ones.",
-  },
-  {
-    title: "Honesty",
-    body: "We recommend the path that is right for the student, not the one that earns us more. If a destination isn't the right fit, we say so.",
-  },
-  {
-    title: "Care",
-    body: "Our counsellors are with students from the first query to the day they land abroad. We answer late-night messages and celebrate every approval.",
-  },
-] as const;
+export default async function AboutPage() {
+  const [team, gallery] = await Promise.all([
+    getTeamMembers(),
+    getGalleryPhotos(),
+  ]);
 
-export default function AboutPage() {
   return (
     <>
       {/* Hero */}
@@ -56,26 +52,6 @@ export default function AboutPage() {
             belief: every student deserves honest, personalised guidance on
             studying abroad — not a sales pitch, but a clear view of their future.
           </p>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="bg-sky py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-h2 font-semibold text-ink mb-10 text-center">
-            What We Stand For
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {VALUES.map(({ title, body }) => (
-              <div key={title} className="bg-paper rounded-xl p-7">
-                <div className="w-8 h-0.5 bg-brass mb-5" />
-                <h3 className="font-display font-semibold text-h3 text-ink mb-3">
-                  {title}
-                </h3>
-                <p className="text-slate text-sm leading-relaxed">{body}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -124,6 +100,10 @@ export default function AboutPage() {
           Get in Touch
         </Link>
       </section>
+
+      {/* Team + Gallery */}
+      <TeamSection members={team} />
+      <GallerySection photos={gallery} />
     </>
   );
 }

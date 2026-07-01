@@ -80,6 +80,30 @@ export type ContactSubmission = {
   consented: boolean;
 };
 
+// Team members + Gallery photos. `*_path` is the Supabase Storage object path
+// stored in the DB; `*_url` is the public URL resolved by the data layer via
+// getPublicUrl() and is not a column.
+export type TeamMember = {
+  id: string;
+  name: string;
+  title: string;
+  photo_path: string;
+  photo_url: string;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type GalleryPhoto = {
+  id: string;
+  image_path: string;
+  image_url: string;
+  caption: string | null;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
 // A stored contact_submissions row, as read by the admin panel.
 export type ContactSubmissionRow = ContactSubmission & {
   id: string;

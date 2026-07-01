@@ -72,7 +72,7 @@ export default function ContactForm() {
             required
             autoComplete="email"
             className={FIELD}
-            placeholder="priya@example.com"
+            placeholder="nayan@example.com"
           />
         </div>
       </div>
