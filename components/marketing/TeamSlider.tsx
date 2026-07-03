@@ -65,6 +65,9 @@ export default function TeamSlider({ members }: { members: TeamMember[] }) {
 
   if (count === 0) return null;
   const showControls = maxIndex > 0;
+  // Per-card width (%) — also drives the slide step so cards stay aligned.
+  // Narrower cards in the 2-up range per design (30% instead of 50%).
+  const cardPct = visible === 2 ? 30 : 100 / visible;
 
   return (
     <div
@@ -78,7 +81,7 @@ export default function TeamSlider({ members }: { members: TeamMember[] }) {
         <div
           className="flex"
           style={{
-            transform: `translateX(-${index * (100 / visible)}%)`,
+            transform: `translateX(-${index * cardPct}%)`,
             transition: "transform 600ms cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
@@ -86,10 +89,10 @@ export default function TeamSlider({ members }: { members: TeamMember[] }) {
             <div
               key={m.id}
               className="shrink-0 px-2"
-              style={{ width: `${100 / visible}%` }}
+              style={{ width: `${cardPct}%` }}
             >
               <div className="bg-paper rounded-xl border border-sand overflow-hidden h-full">
-                <div className="relative aspect-[4/5] bg-sky">
+                <div className="relative aspect-square bg-sky">
                   <Image
                     src={m.photo_url}
                     alt={m.name}

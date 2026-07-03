@@ -118,7 +118,7 @@ export default async function MaterialLeadsPage({
               name="q"
               defaultValue={sp.q ?? ""}
               placeholder="Search…"
-              className="w-full rounded-md border border-sand bg-paper pl-9 pr-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
+              className="w-full rounded-md border border-sand bg-paper pl-11 pr-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
         </div>

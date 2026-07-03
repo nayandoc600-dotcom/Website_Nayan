@@ -43,7 +43,7 @@ export default async function TeamPage() {
                   key={m.id}
                   className="bg-paper rounded-xl border border-sand overflow-hidden"
                 >
-                  <div className="relative aspect-[4/5] bg-sky">
+                  <div className="relative aspect-square bg-sky">
                     <Image
                       src={m.photo_url}
                       alt={m.name}

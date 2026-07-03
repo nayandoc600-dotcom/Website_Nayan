@@ -83,8 +83,8 @@ export default function Header() {
           <Image
             src="/main-logo.png"
             alt="Nayan Educational"
-            width={150}
-            height={56}
+            width={362}
+            height={342}
             className="h-14 w-auto object-contain"
             priority
           />

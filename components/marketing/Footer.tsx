@@ -44,8 +44,8 @@ export default function Footer() {
               <Image
                 src="/main-logo.png"
                 alt="Nayan Educational Consultancy"
-                width={90}
-                height={30}
+                width={362}
+                height={342}
                 className="h-7 w-auto object-contain"
               />
             </span>
