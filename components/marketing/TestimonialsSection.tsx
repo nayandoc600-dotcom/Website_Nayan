@@ -120,15 +120,19 @@ export default function TestimonialsSection({
           onBlur={handleBlur}
         >
           {/* aria-live lets screen readers announce slide changes */}
+          {/* Slide spacing lives on the slides (pl-5 + negative margin on the
+              container) rather than flex `gap` — gap spacing does not follow
+              slides that Embla repositions when looping, which made cards
+              butt up against each other at the loop seam. */}
           <div
-            className="flex gap-5"
+            className="flex -ml-5"
             aria-live={prefersReduced ? "off" : "polite"}
             aria-atomic="false"
           >
             {testimonials.map((t, i) => (
               <div
                 key={t.id}
-                className="flex-none w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)]"
+                className="flex-none pl-5 w-full sm:w-1/2 lg:w-1/3"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Testimonial ${i + 1} of ${testimonials.length}`}
