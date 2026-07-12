@@ -6,6 +6,7 @@ import StatsSection from "@/components/marketing/StatsSection";
 import DestinationsPreview from "@/components/marketing/DestinationsPreview";
 import VisaApprovalsSection from "@/components/marketing/VisaApprovalsSection";
 import TestimonialsSection from "@/components/marketing/TestimonialsSection";
+import ProvidersSlider from "@/components/marketing/ProvidersSlider";
 import TestimonialSubmitForm from "@/components/marketing/TestimonialSubmitForm";
 
 export const revalidate = 3600;
@@ -39,6 +40,7 @@ export default async function HomePage() {
       <DestinationsPreview />
       <VisaApprovalsSection approvals={visaApprovals} />
       <TestimonialsSection testimonials={testimonials} />
+      <ProvidersSlider />
 
       {/* Student feedback submission */}
       <section className="bg-sky py-14 px-6 border-t border-sand">
