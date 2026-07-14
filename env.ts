@@ -11,8 +11,10 @@ export const env = createEnv({
     // RESEND_TO=<your Resend account email>.
     RESEND_FROM: z.string().min(1).default("Nayan Website <noreply@nayanedu.com>"),
     RESEND_TO: z.string().email().default("info@nayanedu.com"),
-    GOOGLE_SHEETS_CREDENTIALS: z.string().min(1),
-    GOOGLE_SHEETS_SPREADSHEET_ID: z.string().min(1),
+    // Optional — the database is the permanent record. Set both to enable the
+    // Google Sheets mirror of contact submissions.
+    GOOGLE_SHEETS_CREDENTIALS: z.string().optional(),
+    GOOGLE_SHEETS_SPREADSHEET_ID: z.string().optional(),
     CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string().min(1),
   },
   client: {

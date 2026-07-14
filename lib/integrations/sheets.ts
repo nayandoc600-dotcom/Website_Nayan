@@ -11,6 +11,12 @@ type ContactPayload = {
 };
 
 export async function appendToSheet(data: ContactPayload): Promise<void> {
+  // Google Sheets mirroring is optional. The database (contact_submissions,
+  // viewable in Admin → Queries) is the permanent, searchable record. If Sheets
+  // isn't configured, skip silently.
+  if (!env.GOOGLE_SHEETS_CREDENTIALS || !env.GOOGLE_SHEETS_SPREADSHEET_ID) {
+    return;
+  }
   try {
     const credentials = JSON.parse(env.GOOGLE_SHEETS_CREDENTIALS) as object;
 
