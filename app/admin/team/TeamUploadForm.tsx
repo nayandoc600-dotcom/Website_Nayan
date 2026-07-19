@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useEffect } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import { createTeamMember } from "@/lib/actions/team";
 
 const FIELD =
@@ -11,6 +12,7 @@ const LABEL = "text-xs font-medium text-slate uppercase tracking-wide";
 export default function TeamUploadForm() {
   const [state, formAction] = useActionState(createTeamMember, null);
   const formRef = useRef<HTMLFormElement>(null);
+  const photo = useUploadSizeGuard();
 
   useEffect(() => {
     if (state?.ok) formRef.current?.reset();
@@ -26,7 +28,7 @@ export default function TeamUploadForm() {
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="photo" className={LABEL}>
-            Photo (JPEG, PNG, WebP · max 5 MB)
+            Photo (JPEG, PNG, WebP · max 4 MB)
           </label>
           <input
             id="photo"
@@ -34,8 +36,12 @@ export default function TeamUploadForm() {
             type="file"
             accept="image/jpeg,image/png,image/webp"
             required
+            onChange={photo.onChange}
             className="text-sm text-slate file:mr-3 file:rounded-md file:border-0 file:bg-brand file:text-paper file:px-3 file:py-1.5 file:text-xs file:font-medium hover:file:bg-ink file:transition-colors"
           />
+          {photo.error && (
+            <p role="alert" className="text-xs text-red-600">{photo.error}</p>
+          )}
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="name" className={LABEL}>Name</label>
@@ -59,7 +65,7 @@ export default function TeamUploadForm() {
       )}
 
       <div className="mt-4">
-        <SubmitButton label="Add Member" pendingLabel="Adding…" />
+        <SubmitButton label="Add Member" pendingLabel="Adding…" disabled={photo.tooBig} />
       </div>
     </form>
   );

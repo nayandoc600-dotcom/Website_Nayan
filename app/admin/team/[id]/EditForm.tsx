@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Image from "next/image";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import { updateTeamMember } from "@/lib/actions/team";
 import type { TeamMember } from "@/lib/types";
 
@@ -17,6 +18,7 @@ export default function EditForm({ member }: { member: TeamMember }) {
     updateTeamMember,
     null,
   );
+  const photo = useUploadSizeGuard();
 
   return (
     <form action={formAction} className="flex flex-col gap-5 max-w-lg">
@@ -34,15 +36,19 @@ export default function EditForm({ member }: { member: TeamMember }) {
         </div>
         <div className="flex flex-col gap-1.5 flex-1">
           <label htmlFor="photo" className={LABEL}>
-            Replace photo (optional · JPEG, PNG, WebP · max 5 MB)
+            Replace photo (optional · JPEG, PNG, WebP · max 4 MB)
           </label>
           <input
             id="photo"
             name="photo"
             type="file"
             accept="image/jpeg,image/png,image/webp"
+            onChange={photo.onChange}
             className="text-sm text-slate file:mr-3 file:rounded-md file:border-0 file:bg-brand file:text-paper file:px-3 file:py-1.5 file:text-xs file:font-medium hover:file:bg-ink file:transition-colors"
           />
+          {photo.error && (
+            <p role="alert" className="text-xs text-red-600">{photo.error}</p>
+          )}
         </div>
       </div>
 
@@ -68,7 +74,7 @@ export default function EditForm({ member }: { member: TeamMember }) {
         <p role="status" className="text-sm text-green-600">Saved.</p>
       )}
 
-      <SubmitButton label="Save Changes" pendingLabel="Saving…" />
+      <SubmitButton label="Save Changes" pendingLabel="Saving…" disabled={photo.tooBig} />
     </form>
   );
 }

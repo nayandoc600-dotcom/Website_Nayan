@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useEffect } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import type { uploadVisaApproval } from "@/lib/actions/visa-approvals";
 
 type UploadAction = typeof uploadVisaApproval;
@@ -9,6 +10,7 @@ type UploadAction = typeof uploadVisaApproval;
 export default function UploadForm({ action }: { action: UploadAction }) {
   const [state, formAction] = useActionState(action, null);
   const formRef = useRef<HTMLFormElement>(null);
+  const image = useUploadSizeGuard();
 
   useEffect(() => {
     if (state?.ok) formRef.current?.reset();
@@ -26,7 +28,7 @@ export default function UploadForm({ action }: { action: UploadAction }) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="image" className="text-xs font-medium text-slate uppercase tracking-wide">
-            Image (JPEG, PNG, WebP · max 5 MB)
+            Image (JPEG, PNG, WebP · max 4 MB)
           </label>
           <input
             id="image"
@@ -34,8 +36,12 @@ export default function UploadForm({ action }: { action: UploadAction }) {
             type="file"
             accept="image/jpeg,image/png,image/webp"
             required
+            onChange={image.onChange}
             className="text-sm text-slate file:mr-3 file:rounded-md file:border-0 file:bg-brand file:text-paper file:px-3 file:py-1.5 file:text-xs file:font-medium hover:file:bg-ink file:transition-colors"
           />
+          {image.error && (
+            <p role="alert" className="text-xs text-red-600">{image.error}</p>
+          )}
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="student" className="text-xs font-medium text-slate uppercase tracking-wide">
@@ -61,7 +67,7 @@ export default function UploadForm({ action }: { action: UploadAction }) {
           </p>
         )}
 
-        <SubmitButton label="Upload" pendingLabel="Uploading…" />
+        <SubmitButton label="Upload" pendingLabel="Uploading…" disabled={image.tooBig} />
       </div>
     </form>
   );

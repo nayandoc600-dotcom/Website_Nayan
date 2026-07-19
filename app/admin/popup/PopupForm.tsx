@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import type { upsertPopup } from "@/lib/actions/popup";
 import type { PopupNotice } from "@/lib/types";
 
@@ -21,6 +22,8 @@ export default function PopupForm({
   notice: PopupNotice | null;
 }) {
   const [state, formAction] = useActionState(action, null);
+  const image = useUploadSizeGuard();
+  const pdf = useUploadSizeGuard();
 
   return (
     <form action={formAction} className="flex flex-col gap-5 max-w-lg">
@@ -57,7 +60,7 @@ export default function PopupForm({
       {/* Image upload */}
       <div className="flex flex-col gap-1.5">
         <label htmlFor="image" className={LABEL}>
-          Image (optional · JPEG, PNG, WebP · max 5 MB)
+          Image (optional · JPEG, PNG, WebP · max 4 MB)
         </label>
         {notice?.image_url && (
           <div className="flex items-center gap-3 mb-1">
@@ -78,8 +81,12 @@ export default function PopupForm({
           name="image"
           type="file"
           accept="image/jpeg,image/png,image/webp"
+          onChange={image.onChange}
           className={FILE}
         />
+        {image.error && (
+          <p role="alert" className="text-xs text-red-600">{image.error}</p>
+        )}
         <p className="text-xs text-slate">
           Shown above the popup text. Upload a new file to replace the current one.
         </p>
@@ -88,7 +95,7 @@ export default function PopupForm({
       {/* PDF upload */}
       <div className="flex flex-col gap-1.5">
         <label htmlFor="pdf" className={LABEL}>
-          PDF (optional · max 10 MB)
+          PDF (optional · max 4 MB)
         </label>
         {notice?.pdf_url && (
           <div className="flex items-center gap-3 mb-1">
@@ -111,8 +118,12 @@ export default function PopupForm({
           name="pdf"
           type="file"
           accept="application/pdf"
+          onChange={pdf.onChange}
           className={FILE}
         />
+        {pdf.error && (
+          <p role="alert" className="text-xs text-red-600">{pdf.error}</p>
+        )}
         <p className="text-xs text-slate">
           Visitors can open or download it from the popup (e.g. a brochure).
         </p>
@@ -170,7 +181,11 @@ export default function PopupForm({
         <p role="status" className="text-sm text-green-600">Saved successfully.</p>
       )}
 
-      <SubmitButton label="Save Popup" pendingLabel="Saving…" />
+      <SubmitButton
+        label="Save Popup"
+        pendingLabel="Saving…"
+        disabled={image.tooBig || pdf.tooBig}
+      />
     </form>
   );
 }

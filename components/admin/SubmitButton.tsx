@@ -7,6 +7,7 @@ type Props = {
   pendingLabel?: string;
   variant?: "primary" | "danger";
   className?: string;
+  disabled?: boolean;
 };
 
 export default function SubmitButton({
@@ -14,6 +15,7 @@ export default function SubmitButton({
   pendingLabel,
   variant = "primary",
   className = "",
+  disabled = false,
 }: Props) {
   const { pending } = useFormStatus();
 
@@ -27,7 +29,7 @@ export default function SubmitButton({
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={pending || disabled}
       className={[base, variants[variant], className].join(" ")}
     >
       {pending ? (pendingLabel ?? `${label}…`) : label}

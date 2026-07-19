@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useEffect } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import type { uploadStudyMaterial } from "@/lib/actions/study-materials";
 import type { Destination } from "@/lib/destinations";
 
@@ -20,6 +21,7 @@ export default function MaterialUploadForm({
 }) {
   const [state, formAction] = useActionState(action, null);
   const formRef = useRef<HTMLFormElement>(null);
+  const file = useUploadSizeGuard();
 
   useEffect(() => {
     if (state?.ok) formRef.current?.reset();
@@ -35,7 +37,7 @@ export default function MaterialUploadForm({
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="file" className={LABEL}>
-            File (PDF or Word · max 25 MB)
+            File (PDF or Word · max 4 MB)
           </label>
           <input
             id="file"
@@ -43,8 +45,12 @@ export default function MaterialUploadForm({
             type="file"
             accept=".pdf,.doc,.docx"
             required
+            onChange={file.onChange}
             className="text-sm text-slate file:mr-3 file:rounded-md file:border-0 file:bg-brand file:text-paper file:px-3 file:py-1.5 file:text-xs file:font-medium hover:file:bg-ink file:transition-colors"
           />
+          {file.error && (
+            <p role="alert" className="text-xs text-red-600">{file.error}</p>
+          )}
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="mat-title" className={LABEL}>Title</label>
@@ -69,7 +75,7 @@ export default function MaterialUploadForm({
       )}
 
       <div className="mt-4">
-        <SubmitButton label="Upload" pendingLabel="Uploading…" />
+        <SubmitButton label="Upload" pendingLabel="Uploading…" disabled={file.tooBig} />
       </div>
     </form>
   );
