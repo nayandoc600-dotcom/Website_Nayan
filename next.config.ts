@@ -6,6 +6,16 @@ const nextConfig: NextConfig = {
   // Without this, Next.js blocks cross-origin dev resources and interactive
   // components (slider, popup ads) silently fail to hydrate.
   allowedDevOrigins: ["172.27.240.1", "192.168.*.*", "10.0.*.*"],
+  // Admin file uploads (visa approvals, team/gallery images, popup media) run
+  // through Server Actions, which cap the request body at 1 MB by default —
+  // that silently rejected real uploads in production. Raise it to cover our
+  // image uploads. (Vercel's own serverless request-body ceiling is ~4.5 MB,
+  // so very large files still need a direct-to-storage flow.)
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "8mb",
+    },
+  },
   images: {
     // In local dev, Supabase Storage runs on 127.0.0.1 — a private IP that
     // Next.js refuses to optimize (SSRF protection). Skip optimization in dev;
