@@ -40,17 +40,17 @@ export default function VisaCarousel({ approvals }: { approvals: VisaApproval[] 
       onBlur={() => setPaused(false)}
     >
       {/* Image */}
-      <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-sky">
+      <div className="relative aspect-square rounded-xl overflow-hidden bg-sky">
         <Image
           src={current.image_url}
           alt={current.student ? `Visa approval — ${current.student}` : "Visa approval"}
           fill
-          className="object-contain p-4"
+          className="object-contain"
           sizes="(max-width: 768px) 100vw, 50vw"
           priority
         />
         {current.student && (
-          <div className="absolute bottom-0 inset-x-0 bg-ink/70 backdrop-blur-sm px-4 py-2 text-paper text-sm text-center">
+          <div className="absolute bottom-0 inset-x-0 bg-ink/70 backdrop-blur-sm px-5 py-3 text-paper text-base font-medium text-center">
             {current.student}
           </div>
         )}

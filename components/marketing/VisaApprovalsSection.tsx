@@ -30,7 +30,7 @@ export default function VisaApprovalsSection({
         {/* Single image or carousel */}
         <div>
           {approvals.length === 1 ? (
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-paper">
+            <div className="relative aspect-square rounded-xl overflow-hidden bg-paper">
               <Image
                 src={approvals[0].image_url}
                 alt={
@@ -39,12 +39,12 @@ export default function VisaApprovalsSection({
                     : "Visa approval"
                 }
                 fill
-                className="object-contain p-4"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
               {approvals[0].student && (
-                <div className="absolute bottom-0 inset-x-0 bg-ink/70 backdrop-blur-sm px-4 py-2 text-paper text-sm text-center">
+                <div className="absolute bottom-0 inset-x-0 bg-ink/70 backdrop-blur-sm px-5 py-3 text-paper text-base font-medium text-center">
                   {approvals[0].student}
                 </div>
               )}
