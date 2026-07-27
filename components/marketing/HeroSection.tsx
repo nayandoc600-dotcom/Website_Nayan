@@ -3,7 +3,7 @@ import HeroSlider from "./HeroSlider";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[calc(100vh-72px)] flex items-center overflow-hidden">
+    <section className="relative min-h-[calc(100dvh-80px)] flex items-center overflow-hidden">
       {/* Background image slider (with navy gradient base) */}
       <HeroSlider />
 

@@ -65,6 +65,10 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Safety net: never let a stray wide element create a horizontal scrollbar on
+     mobile. `clip` (not `hidden`) avoids creating a scroll container, so the
+     sticky header keeps working. */
+  overflow-x: clip;
 }
 
 h1,

@@ -50,16 +50,16 @@ function JapanContent({
           <div className="flex items-center justify-between gap-4 mb-8">
             <Link
               href="/destinations"
-              className="inline-flex items-center gap-2 text-sm text-paper/80 hover:text-paper transition-colors"
+              className="inline-flex items-center gap-2 whitespace-nowrap text-sm text-paper/80 hover:text-paper transition-colors"
             >
               <ArrowLeft size={15} /> All destinations
             </Link>
-            <div className="flex items-center gap-1 rounded-full bg-white/15 backdrop-blur-sm p-1 text-xs">
+            <div className="flex shrink-0 items-center gap-1 rounded-full bg-white/15 backdrop-blur-sm p-1 text-xs">
               <button
                 onClick={() => onLocaleChange("en")}
                 lang="en"
                 aria-label="Switch to English"
-                className={`px-3 py-1 rounded-full transition-colors ${
+                className={`whitespace-nowrap px-3 py-1 rounded-full transition-colors ${
                   locale === "en"
                     ? "bg-paper text-ink font-medium"
                     : "text-paper/90 hover:bg-white/10"
@@ -71,7 +71,7 @@ function JapanContent({
                 onClick={() => onLocaleChange("ja")}
                 lang="ja"
                 aria-label="Switch to Japanese"
-                className={`px-3 py-1 rounded-full transition-colors ${
+                className={`whitespace-nowrap px-3 py-1 rounded-full transition-colors ${
                   locale === "ja"
                     ? "bg-paper text-ink font-medium"
                     : "text-paper/90 hover:bg-white/10"
