@@ -57,7 +57,7 @@ export default async function AboutPage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-paper py-20 px-6 border-b border-sand">
         <Image
-          src="/about_us.jpg"
+          src="/about.jpg"
           alt=""
           fill
           priority

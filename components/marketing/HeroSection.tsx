@@ -18,9 +18,9 @@ export default function HeroSection() {
       />
 
       {/* Hero copy — all text preserved verbatim */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 w-full py-16">
+      <div className="relative z-20 max-w-6xl mx-auto px-6 w-full py-10 sm:py-16">
         {/* Eyebrow — bigger + bold */}
-        <p className="text-base font-bold text-brass uppercase tracking-widest mb-4">
+        <p className="text-sm sm:text-base font-bold text-brass uppercase tracking-widest mb-3 sm:mb-4">
           Study Abroad from Nepal
         </p>
 
@@ -29,7 +29,7 @@ export default function HeroSection() {
          * rule (unlayered CSS beats utility classes in Tailwind v4).
          */}
         <h1
-          className="font-display text-h1 md:text-5xl lg:text-6xl font-semibold leading-tight mb-6"
+          className="font-display text-4xl sm:text-h1 md:text-5xl lg:text-6xl font-semibold leading-tight mb-4 sm:mb-6"
           style={{ color: "#ffffff" }}
         >
           <em>See your future</em>
@@ -37,12 +37,12 @@ export default function HeroSection() {
           clearly!
         </h1>
 
-        <p className="text-paper/80 text-lg leading-relaxed max-w-md mb-10">
+        <p className="text-paper/80 text-base sm:text-lg leading-relaxed max-w-md mb-8 sm:mb-10">
           Nayan Educational Consultancy helps students across Nepal navigate
           the study-abroad journey — from choosing the right country to
           landing the visa — with clarity and confidence.
         </p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           <Link
             href="/destinations"
             className="inline-flex items-center px-6 py-3 rounded-md bg-brand text-paper font-medium hover:bg-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper"
