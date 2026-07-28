@@ -116,21 +116,24 @@ export default function HeroSlider() {
             <ChevronRight size={22} aria-hidden="true" />
           </button>
 
-          {/* Dot indicators (also confirm rotation visually) */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2">
-            {HERO_IMAGES.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                aria-current={i === index ? "true" : undefined}
-                className={[
-                  "h-2 rounded-full transition-all duration-300",
-                  i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80",
-                ].join(" ")}
-              />
-            ))}
+          {/* Dot indicators — centered on mobile, aligned under the (left-
+              aligned) hero copy on desktop so they don't collide with the CTAs. */}
+          <div className="absolute bottom-6 inset-x-0 z-30">
+            <div className="max-w-6xl mx-auto px-6 flex justify-center md:justify-start gap-2">
+              {HERO_IMAGES.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  aria-current={i === index ? "true" : undefined}
+                  className={[
+                    "h-2 rounded-full transition-all duration-300",
+                    i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80",
+                  ].join(" ")}
+                />
+              ))}
+            </div>
           </div>
         </>
       )}
