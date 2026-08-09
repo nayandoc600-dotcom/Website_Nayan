@@ -10,7 +10,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * Any orientation works (object-cover fills + crops). Do NOT use the logo.
  */
 const HERO_IMAGES = [
-  "/bg1.jpg",
   "/bg2.jpg",
   "/office-1.jpg",
   "/office-2.jpg",
