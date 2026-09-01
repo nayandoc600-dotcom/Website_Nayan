@@ -4,6 +4,7 @@ import { deleteGalleryPhoto } from "@/lib/actions/gallery";
 import SubmitButton from "@/components/admin/SubmitButton";
 import GalleryUploadForm from "./GalleryUploadForm";
 import CaptionForm from "./CaptionForm";
+import CategorySelect from "./CategorySelect";
 
 export const dynamic = "force-dynamic";
 
@@ -39,9 +40,7 @@ export default async function GalleryAdminPage() {
                   sizes="300px"
                 />
               </div>
-              <span className="self-start px-2 py-0.5 rounded-full bg-paper border border-sand text-xs text-slate">
-                {p.category}
-              </span>
+              <CategorySelect id={p.id} category={p.category} />
               <CaptionForm id={p.id} caption={p.caption} />
               <div className="mt-auto flex items-center justify-between gap-2 text-xs">
                 <span className="text-slate">

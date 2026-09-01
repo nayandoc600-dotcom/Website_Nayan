@@ -97,6 +97,31 @@ export async function updateGalleryCaption(
   return { ok: true };
 }
 
+export async function updateGalleryCategory(
+  _prev: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const auth = await assertAuthenticated();
+  if (!auth.ok) return auth;
+
+  const id = formData.get("id");
+  if (!z.string().uuid().safeParse(id).success) {
+    return { ok: false, error: "Invalid photo." };
+  }
+  const category = z.enum(GALLERY_CATEGORIES).safeParse(formData.get("category"));
+  if (!category.success) return { ok: false, error: "Invalid category." };
+
+  const supabase = createServiceClient();
+  const { error } = await supabase
+    .from("gallery_photos")
+    .update({ category: category.data, updated_at: new Date().toISOString() })
+    .eq("id", id as string);
+  if (error) return { ok: false, error: error.message };
+
+  revalidate();
+  return { ok: true };
+}
+
 export async function deleteGalleryPhoto(id: string): Promise<void> {
   const auth = await assertAuthenticated();
   if (!auth.ok) return;
