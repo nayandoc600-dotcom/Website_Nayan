@@ -39,6 +39,9 @@ export default async function GalleryAdminPage() {
                   sizes="300px"
                 />
               </div>
+              <span className="self-start px-2 py-0.5 rounded-full bg-paper border border-sand text-xs text-slate">
+                {p.category}
+              </span>
               <CaptionForm id={p.id} caption={p.caption} />
               <div className="mt-auto flex items-center justify-between gap-2 text-xs">
                 <span className="text-slate">

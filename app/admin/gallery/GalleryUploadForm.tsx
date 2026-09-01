@@ -4,6 +4,7 @@ import { useActionState, useRef, useEffect } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
 import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import { createGalleryPhoto } from "@/lib/actions/gallery";
+import { GALLERY_CATEGORIES } from "@/lib/gallery-categories";
 
 const FIELD =
   "rounded-md border border-sand bg-paper px-3 py-2 text-sm text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent";
@@ -42,6 +43,15 @@ export default function GalleryUploadForm() {
           {image.error && (
             <p role="alert" className="text-xs text-red-600">{image.error}</p>
           )}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="category" className={LABEL}>Category (album)</label>
+          <select id="category" name="category" required defaultValue="" className={FIELD}>
+            <option value="" disabled>Select an album…</option>
+            {GALLERY_CATEGORIES.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="caption" className={LABEL}>Caption (optional)</label>

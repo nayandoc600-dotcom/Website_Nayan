@@ -5,6 +5,7 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/service";
 import { detectMime } from "@/lib/utils/mime";
+import { GALLERY_CATEGORIES } from "@/lib/gallery-categories";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -35,9 +36,13 @@ export async function createGalleryPhoto(
   const caption = (formData.get("caption") as string | null)?.trim() || null;
   const sortOrder = z.coerce.number().int().min(0).max(9999).default(0)
     .safeParse(formData.get("sort_order") || 0);
+  const category = z
+    .enum(GALLERY_CATEGORIES)
+    .safeParse(formData.get("category"));
 
   if (!file || file.size === 0) return { ok: false, error: "An image is required." };
   if (file.size > MAX_SIZE) return { ok: false, error: "Image must be under 5 MB." };
+  if (!category.success) return { ok: false, error: "Please choose a category." };
   if (caption && caption.length > 200) {
     return { ok: false, error: "Caption must be under 200 characters." };
   }
@@ -56,6 +61,7 @@ export async function createGalleryPhoto(
   const { error: dbError } = await supabase.from("gallery_photos").insert({
     image_path: path,
     caption,
+    category: category.data,
     sort_order: sortOrder.success ? sortOrder.data : 0,
   });
   if (dbError) return { ok: false, error: dbError.message };

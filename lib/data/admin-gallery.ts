@@ -6,7 +6,7 @@ export async function getAllGalleryPhotos(): Promise<GalleryPhoto[]> {
   const supabase = createServiceClient();
   const { data, error } = await supabase
     .from("gallery_photos")
-    .select("id, image_path, caption, sort_order, created_at, updated_at")
+    .select("id, image_path, caption, category, sort_order, created_at, updated_at")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: true });
 

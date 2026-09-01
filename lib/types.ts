@@ -99,6 +99,7 @@ export type GalleryPhoto = {
   image_path: string;
   image_url: string;
   caption: string | null;
+  category: string;
   sort_order: number;
   created_at: string;
   updated_at: string;
