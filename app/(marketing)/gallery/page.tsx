@@ -8,7 +8,7 @@ import type { GalleryPhoto } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Moments from Nayan Educational Consultancy — Block A, Block B, visa successes, programs and events.",
+    "Moments from Nayan Educational Consultancy — counselling, classes, visa successes, programs and events.",
 };
 
 export const revalidate = 3600;

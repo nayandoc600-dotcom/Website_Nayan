@@ -2,8 +2,8 @@
 // action's validation, and the public gallery page. Kept out of any "use server"
 // file so client components can import it.
 export const GALLERY_CATEGORIES = [
-  "Block A",
-  "Block B",
+  "Counselling",
+  "Classes",
   "Visa Success",
   "Program and Events",
 ] as const;
