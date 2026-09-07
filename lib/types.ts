@@ -23,6 +23,7 @@ export type PopupNotice = {
   image_url: string | null;
   pdf_url: string | null;
   active: boolean;
+  sort_order: number;
   updated_at: string;
 };
 

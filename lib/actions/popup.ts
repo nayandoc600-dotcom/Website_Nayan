@@ -15,6 +15,13 @@ async function assertAuthenticated(): Promise<ActionResult> {
   return { ok: true };
 }
 
+function revalidate() {
+  revalidatePath("/admin/popup");
+  // Popups are rendered in the marketing layout (every page), so revalidate the
+  // whole tree under the root layout — not just the homepage.
+  revalidatePath("/", "layout");
+}
+
 const MAX_IMAGE = 5 * 1024 * 1024; // 5 MB
 const MAX_PDF = 10 * 1024 * 1024; // 10 MB
 
@@ -34,6 +41,8 @@ const PopupSchema = z.object({
     )
     .optional(),
   active: z.boolean(),
+  // Lowest first — decides the order visitors see multiple popups in.
+  sort_order: z.coerce.number().int().min(0).max(999).optional(),
 });
 
 /**
@@ -85,13 +94,14 @@ export async function upsertPopup(
     cta_label: formData.get("cta_label") || undefined,
     cta_url: formData.get("cta_url") || undefined,
     active: formData.get("active") === "true",
+    sort_order: formData.get("sort_order") || undefined,
   });
 
   if (!parsed.success) {
     return { ok: false, error: parsed.error.issues[0].message };
   }
 
-  const { id, cta_label, cta_url, ...rest } = parsed.data;
+  const { id, cta_label, cta_url, sort_order, ...rest } = parsed.data;
 
   // Resolve uploaded media (image + PDF)
   const image = await resolveMedia(
@@ -131,6 +141,7 @@ export async function upsertPopup(
       cta_label: cta_label || null,
       cta_url: cta_url || null,
       active: rest.active,
+      sort_order: sort_order ?? 0,
       updated_at: new Date().toISOString(),
     };
     // Only touch media columns when the admin changed them.
@@ -140,27 +151,57 @@ export async function upsertPopup(
     const { error } = await supabase.from("popup_notice").update(payload).eq("id", id);
     if (error) return { ok: false, error: error.message };
   } else {
-    // New popup: deactivate any currently-active popup first.
-    await supabase
-      .from("popup_notice")
-      .update({ active: false, updated_at: new Date().toISOString() })
-      .eq("active", true);
-
+    // New popup. Any other active popups stay active — visitors are shown all
+    // of them in turn, ordered by sort_order.
     const { error } = await supabase.from("popup_notice").insert({
       title,
       body,
       cta_label: cta_label || null,
       cta_url: cta_url || null,
       active: rest.active,
+      sort_order: sort_order ?? 0,
       image_url: image.value ?? null,
       pdf_url: pdf.value ?? null,
     });
     if (error) return { ok: false, error: error.message };
   }
 
-  revalidatePath("/admin/popup");
-  // Popup is rendered in the marketing layout (every page), so revalidate the
-  // whole tree under the root layout — not just the homepage.
-  revalidatePath("/", "layout");
+  revalidate();
   return { ok: true };
+}
+
+/** Turns a popup-media public URL back into its storage object path. */
+function storagePath(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const marker = "/popup-media/";
+  const at = url.indexOf(marker);
+  return at === -1 ? null : decodeURIComponent(url.slice(at + marker.length));
+}
+
+export async function deletePopup(id: string): Promise<void> {
+  const auth = await assertAuthenticated();
+  if (!auth.ok) return;
+  if (!z.string().uuid().safeParse(id).success) return;
+
+  const supabase = createServiceClient();
+
+  const { data: row } = await supabase
+    .from("popup_notice")
+    .select("image_url, pdf_url")
+    .eq("id", id)
+    .maybeSingle();
+
+  const { error } = await supabase.from("popup_notice").delete().eq("id", id);
+  if (error) {
+    console.error("deletePopup:", error.message);
+    return;
+  }
+
+  // Drop the popup's uploaded media so the bucket doesn't collect orphans.
+  const paths = [storagePath(row?.image_url), storagePath(row?.pdf_url)].filter(
+    (p): p is string => Boolean(p),
+  );
+  if (paths.length) await supabase.storage.from("popup-media").remove(paths);
+
+  revalidate();
 }

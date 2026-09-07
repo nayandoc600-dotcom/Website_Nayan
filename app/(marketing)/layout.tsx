@@ -1,21 +1,21 @@
 import Header from "@/components/marketing/Header";
 import Footer from "@/components/marketing/Footer";
 import Popup from "@/components/marketing/Popup";
-import { getActivePopup } from "@/lib/data/popup";
+import { getActivePopups } from "@/lib/data/popup";
 
 export default async function MarketingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const popup = await getActivePopup();
+  const popups = await getActivePopups();
 
   return (
     <>
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
-      {popup && <Popup notice={popup} />}
+      {popups.length > 0 && <Popup notices={popups} />}
     </>
   );
 }

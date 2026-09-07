@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useId } from "react";
 import SubmitButton from "@/components/admin/SubmitButton";
 import { useUploadSizeGuard } from "@/components/admin/useUploadSizeGuard";
 import type { upsertPopup } from "@/lib/actions/popup";
@@ -24,15 +24,18 @@ export default function PopupForm({
   const [state, formAction] = useActionState(action, null);
   const image = useUploadSizeGuard();
   const pdf = useUploadSizeGuard();
+  // Several of these forms share one page now, so field ids must be unique
+  // or every label would point at the first form's inputs.
+  const uid = useId();
 
   return (
     <form action={formAction} className="flex flex-col gap-5 max-w-lg">
       {notice && <input type="hidden" name="id" value={notice.id} />}
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="title" className={LABEL}>Title (optional)</label>
+        <label htmlFor={`${uid}-title`} className={LABEL}>Title (optional)</label>
         <input
-          id="title"
+          id={`${uid}-title`}
           name="title"
           type="text"
           defaultValue={notice?.title ?? ""}
@@ -42,9 +45,9 @@ export default function PopupForm({
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="body" className={LABEL}>Body (optional)</label>
+        <label htmlFor={`${uid}-body`} className={LABEL}>Body (optional)</label>
         <textarea
-          id="body"
+          id={`${uid}-body`}
           name="body"
           rows={3}
           defaultValue={notice?.body ?? ""}
@@ -59,7 +62,7 @@ export default function PopupForm({
 
       {/* Image upload */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="image" className={LABEL}>
+        <label htmlFor={`${uid}-image`} className={LABEL}>
           Image (optional · JPEG, PNG, WebP · max 4 MB)
         </label>
         {notice?.image_url && (
@@ -77,7 +80,7 @@ export default function PopupForm({
           </div>
         )}
         <input
-          id="image"
+          id={`${uid}-image`}
           name="image"
           type="file"
           accept="image/jpeg,image/png,image/webp"
@@ -94,7 +97,7 @@ export default function PopupForm({
 
       {/* PDF upload */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="pdf" className={LABEL}>
+        <label htmlFor={`${uid}-pdf`} className={LABEL}>
           PDF (optional · max 4 MB)
         </label>
         {notice?.pdf_url && (
@@ -114,7 +117,7 @@ export default function PopupForm({
           </div>
         )}
         <input
-          id="pdf"
+          id={`${uid}-pdf`}
           name="pdf"
           type="file"
           accept="application/pdf"
@@ -131,9 +134,9 @@ export default function PopupForm({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="cta_label" className={LABEL}>CTA Label (optional)</label>
+          <label htmlFor={`${uid}-cta_label`} className={LABEL}>CTA Label (optional)</label>
           <input
-            id="cta_label"
+            id={`${uid}-cta_label`}
             name="cta_label"
             type="text"
             defaultValue={notice?.cta_label ?? ""}
@@ -142,9 +145,9 @@ export default function PopupForm({
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="cta_url" className={LABEL}>CTA URL (optional)</label>
+          <label htmlFor={`${uid}-cta_url`} className={LABEL}>CTA URL (optional)</label>
           <input
-            id="cta_url"
+            id={`${uid}-cta_url`}
             name="cta_url"
             type="text"
             defaultValue={notice?.cta_url ?? ""}
@@ -152,6 +155,22 @@ export default function PopupForm({
             placeholder="/contact"
           />
         </div>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={`${uid}-sort_order`} className={LABEL}>Order</label>
+        <input
+          id={`${uid}-sort_order`}
+          name="sort_order"
+          type="number"
+          min={0}
+          max={999}
+          defaultValue={notice?.sort_order ?? 0}
+          className={`${FIELD} w-24`}
+        />
+        <p className="text-xs text-slate">
+          Lowest number shows first when several popups are active.
+        </p>
       </div>
 
       <div className="flex items-center gap-3">
@@ -182,7 +201,7 @@ export default function PopupForm({
       )}
 
       <SubmitButton
-        label="Save Popup"
+        label={notice ? "Save Popup" : "Add Popup"}
         pendingLabel="Saving…"
         disabled={image.tooBig || pdf.tooBig}
       />
