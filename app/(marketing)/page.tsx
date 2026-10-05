@@ -1,4 +1,4 @@
-import { getRecentVisaApprovals } from "@/lib/data/visa-approvals";
+import { getVisaApprovals } from "@/lib/data/visa-approvals";
 import { getApprovedTestimonials } from "@/lib/data/testimonials";
 import { DESTINATIONS } from "@/lib/destinations";
 import HeroSection from "@/components/marketing/HeroSection";
@@ -25,7 +25,7 @@ const destinationsJsonLd = {
 
 export default async function HomePage() {
   const [visaApprovals, testimonials] = await Promise.all([
-    getRecentVisaApprovals(),
+    getVisaApprovals(),
     getApprovedTestimonials(),
   ]);
 

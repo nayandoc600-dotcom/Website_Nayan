@@ -21,9 +21,8 @@ export default function VisaApprovalsSection({
             Visa Approvals
           </h2>
           <p className="text-slate leading-relaxed max-w-sm">
-            Every visa approved is a student's dream made real. These are our
-            recent approvals which are updated weekly so you can see how active our
-            students are.
+            Every visa approved is a student's dream made real. These are the
+            approvals our students have earned with us.
           </p>
         </div>
 

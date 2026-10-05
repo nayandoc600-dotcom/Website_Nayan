@@ -8,10 +8,6 @@ export const dynamic = "force-dynamic";
 
 export default async function VisaApprovalsAdminPage() {
   const approvals = await getAllVisaApprovals();
-  const recent = approvals.filter(
-    (a) =>
-      new Date(a.created_at).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000,
-  );
 
   return (
     <div>
@@ -19,7 +15,7 @@ export default async function VisaApprovalsAdminPage() {
         Visa Approvals
       </h1>
       <p className="text-slate text-sm mb-8">
-        {recent.length} active (last 7 days) · {approvals.length} total
+        {approvals.length} on the website — each one stays up until you delete it.
       </p>
 
       <UploadForm action={uploadVisaApproval} />
@@ -32,55 +28,45 @@ export default async function VisaApprovalsAdminPage() {
           <p className="text-sm text-slate">No visa approvals uploaded yet.</p>
         )}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {approvals.map((a) => {
-            const isActive =
-              new Date(a.created_at).getTime() >
-              Date.now() - 7 * 24 * 60 * 60 * 1000;
-            return (
-              <div
-                key={a.id}
-                className="rounded-xl border border-sand bg-sky p-4 flex flex-col gap-3 h-full"
-              >
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-paper">
-                  <Image
-                    src={a.image_url}
-                    alt={a.student ?? "Visa approval"}
-                    fill
-                    className="object-contain p-2"
-                    sizes="300px"
-                  />
-                </div>
-                {/* mt-auto pins this row to the bottom; items-end keeps the
-                    Delete button on the same baseline across every card. */}
-                <div className="mt-auto flex items-end justify-between gap-2 text-xs">
-                  <div className="min-w-0">
-                    {a.student && (
-                      <p className="font-medium text-ink truncate">{a.student}</p>
-                    )}
-                    <p className="text-slate">
-                      {new Date(a.created_at).toLocaleDateString()}
-                      {isActive && (
-                        <span className="ml-2 text-green-600 font-medium">
-                          Active
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <form
-                    action={deleteVisaApproval.bind(null, a.id)}
-                    className="shrink-0"
-                  >
-                    <SubmitButton
-                      label="Delete"
-                      pendingLabel="…"
-                      variant="danger"
-                      className="text-xs px-3 py-1.5"
-                    />
-                  </form>
-                </div>
+          {approvals.map((a) => (
+            <div
+              key={a.id}
+              className="rounded-xl border border-sand bg-sky p-4 flex flex-col gap-3 h-full"
+            >
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-paper">
+                <Image
+                  src={a.image_url}
+                  alt={a.student ?? "Visa approval"}
+                  fill
+                  className="object-contain p-2"
+                  sizes="300px"
+                />
               </div>
-            );
-          })}
+              {/* mt-auto pins this row to the bottom; items-end keeps the
+                  Delete button on the same baseline across every card. */}
+              <div className="mt-auto flex items-end justify-between gap-2 text-xs">
+                <div className="min-w-0">
+                  {a.student && (
+                    <p className="font-medium text-ink truncate">{a.student}</p>
+                  )}
+                  <p className="text-slate">
+                    {new Date(a.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+                <form
+                  action={deleteVisaApproval.bind(null, a.id)}
+                  className="shrink-0"
+                >
+                  <SubmitButton
+                    label="Delete"
+                    pendingLabel="…"
+                    variant="danger"
+                    className="text-xs px-3 py-1.5"
+                  />
+                </form>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>

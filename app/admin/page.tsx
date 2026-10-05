@@ -4,7 +4,7 @@ async function getStats() {
   const supabase = createServiceClient();
   const [
     { count: pendingTestimonials },
-    { count: recentApprovals },
+    { count: visaApprovals },
     { count: draftNews },
   ] = await Promise.all([
     supabase
@@ -13,11 +13,7 @@ async function getStats() {
       .eq("approved", false),
     supabase
       .from("visa_approvals")
-      .select("*", { count: "exact", head: true })
-      .gt(
-        "created_at",
-        new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-      ),
+      .select("*", { count: "exact", head: true }),
     supabase
       .from("news_posts")
       .select("*", { count: "exact", head: true })
@@ -25,7 +21,7 @@ async function getStats() {
   ]);
   return {
     pendingTestimonials: pendingTestimonials ?? 0,
-    recentApprovals: recentApprovals ?? 0,
+    visaApprovals: visaApprovals ?? 0,
     draftNews: draftNews ?? 0,
   };
 }
@@ -41,8 +37,8 @@ export default async function AdminDashboard() {
       urgent: stats.pendingTestimonials > 0,
     },
     {
-      label: "Visa approvals (last 7 days)",
-      value: stats.recentApprovals,
+      label: "Visa approvals on the website",
+      value: stats.visaApprovals,
       href: "/admin/visa-approvals",
       urgent: false,
     },

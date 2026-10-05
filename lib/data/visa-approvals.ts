@@ -1,16 +1,19 @@
 import { createClient } from "@/lib/supabase/server";
 import type { VisaApproval } from "@/lib/types";
 
-export async function getRecentVisaApprovals(): Promise<VisaApproval[]> {
+/**
+ * Every visa approval, newest first. Approvals used to drop off the public site
+ * after 7 days; they now stay up until an admin deletes them.
+ */
+export async function getVisaApprovals(): Promise<VisaApproval[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("visa_approvals")
     .select("*")
-    .gt("created_at", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("getRecentVisaApprovals:", error.message);
+    console.error("getVisaApprovals:", error.message);
     return [];
   }
   return data ?? [];

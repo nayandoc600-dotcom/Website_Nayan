@@ -210,7 +210,7 @@ tests/
 
 - **No secrets in client code.** The service-role key and all API keys live only in `.env.local` (local) or Vercel env vars (production). Files that import the service client have `import "server-only"` at the top.
 - **RLS on every table.** The `anon` role only gets `SELECT` on public tables and `INSERT` on `contact_submissions`. Everything else requires the service-role key or an authenticated session.
-- **Visa approvals expire automatically.** No cron — the query filters `created_at > now() - 7 days`. One upload → standalone image. Two or more → auto-carousel.
+- **Visa approvals stay up permanently.** No expiry, no cron — an approval remains on the site until an admin deletes it. One upload → standalone image. Two or more → auto-carousel.
 - **Contact form is resilient.** Supabase insert is the source of truth. Resend email and Google Sheets run in `Promise.allSettled` — failures are logged but never block the user.
 
 ---
