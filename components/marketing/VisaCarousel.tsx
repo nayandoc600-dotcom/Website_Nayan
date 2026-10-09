@@ -23,7 +23,7 @@ export default function VisaCarousel({ approvals }: { approvals: VisaApproval[] 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (paused || reduced) return;
-    timerRef.current = setInterval(next, 4000);
+    timerRef.current = setInterval(next, 3000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
