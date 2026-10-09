@@ -10,13 +10,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * Any orientation works (object-cover fills + crops). Do NOT use the logo.
  */
 const HERO_IMAGES = [
-  "/bg2.jpg",
+  "/visa1.jpg",
+  "/visa2.jpg",
   "/office-1.jpg",
+  "/bg2.jpg",
+  "/visa3.jpg",
   "/office-2.jpg",
   "/office-3.jpg",
 ];
 
-const INTERVAL_MS = 5000;
+const INTERVAL_MS = 4000;
 
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);

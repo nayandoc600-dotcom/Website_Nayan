@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * Partner / education-provider images — must match the EXACT filenames
  * in /public. All slides share the same 16:9 aspect ratio.
  */
-const PROVIDER_IMAGES = ["/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png"];
+const PROVIDER_IMAGES = ["/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png"];
 
 const INTERVAL_MS = 5000;
 
