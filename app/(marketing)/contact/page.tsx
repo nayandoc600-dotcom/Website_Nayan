@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/marketing/ContactForm";
 
+const SOCIALS = [
+  { src: "/fb.svg", label: "Facebook", href: "https://www.facebook.com/nayan.education" },
+  { src: "/insta.svg", label: "Instagram", href: "https://www.instagram.com/nayaneducational" },
+  { src: "/tiktok.svg", label: "TikTok", href: "https://www.tiktok.com/@nayaneducation" },
+] as const;
+
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
@@ -71,14 +77,38 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
                   Phone
                 </p>
-                <p className="flex flex-col">
+                <div className="flex flex-col gap-1">
                   <a href="tel:+97714797183" className="text-brand hover:underline">
                     +977-1-4797183
                   </a>
                   <a href="tel:+97714794328" className="text-brand hover:underline">
                     +977-1-4794328
                   </a>
-                </p>
+                  <a
+                    href="https://wa.me/9779763424429"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-brand hover:underline"
+                    aria-label="WhatsApp 9763424429"
+                  >
+                    <span
+                      className="block h-[18px] w-[18px]"
+                      style={{
+                        backgroundColor: "currentColor",
+                        WebkitMaskImage: "url(/whatsapp.svg)",
+                        maskImage: "url(/whatsapp.svg)",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskRepeat: "no-repeat",
+                        WebkitMaskPosition: "center",
+                        maskPosition: "center",
+                        WebkitMaskSize: "contain",
+                        maskSize: "contain",
+                      }}
+                      aria-hidden="true"
+                    />
+                    9763424429
+                  </a>
+                </div>
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-1">
@@ -107,6 +137,40 @@ export default function ContactPage() {
                   Office Hours
                 </p>
                 <p className="text-ink">Sun – Fri: 8:00 AM – 5:00 PM NPT</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-brass mb-2">
+                  Follow Us On
+                </p>
+                <div className="flex items-center gap-3" role="list" aria-label="Social media links">
+                  {SOCIALS.map(({ src, label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="listitem"
+                      aria-label={label}
+                      className="text-brand hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
+                    >
+                      <span
+                        className="block h-7 w-7"
+                        style={{
+                          backgroundColor: "currentColor",
+                          WebkitMaskImage: `url(${src})`,
+                          maskImage: `url(${src})`,
+                          WebkitMaskRepeat: "no-repeat",
+                          maskRepeat: "no-repeat",
+                          WebkitMaskPosition: "center",
+                          maskPosition: "center",
+                          WebkitMaskSize: "contain",
+                          maskSize: "contain",
+                        }}
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
